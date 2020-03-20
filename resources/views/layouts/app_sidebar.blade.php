@@ -28,38 +28,38 @@
               <div class="menu_section">
 
                 <ul class="nav side-menu">
-                <li><a href="/"><i class="fa fa-home"></i> Dashboard </a>
+                <li><a href="/"><i class="fas fa-home"></i> Dashboard </a>
 
                 </li>
-                  <li><a><i class="fa fa-sitemap"></i> Department <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-sitemap"></i> Department <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-edit"></i> Doctor <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> Doctor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-edit"></i> Patient <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> Patient <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-stethoscope"></i> Schedule <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-clock"></i> Schedule <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
                     </ul>
                   </li> 
 
-                  <li><a><i class="fa fa-stethoscope"></i> Appointment <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-user-md"></i> Appointment <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
@@ -67,36 +67,14 @@
                   </li>
 
 
-                  <li><a><i class="fa fa-users"></i> Human Resources <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-users"></i> Human Resources <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-dollar"></i> Financial Activities <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
-                    </ul>
-                  </li>
-
-
-                  <li><a><i class="fa fa-stethoscope"></i> Prescription <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
-                    </ul>
-                  </li>
-
-                  <li><a><i class="fa fa-stethoscope"></i> Lab Tests <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
-                    </ul>
-                  </li>
-
-                  <li><a><i class="fa fa-stethoscope"></i> Donor <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-dollar-sign"></i> Financial Activities <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
@@ -104,7 +82,21 @@
                   </li>
 
 
-                  <li><a><i class="fa  fa-hdd-o"></i> Bed Manager <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-notes-medical"></i> Prescription <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="form.html">Add Department</a></li>
+                      <li><a href="form_advanced.html">Department List</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fas fa-flask"></i> Lab Tests <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="form.html">Add Department</a></li>
+                      <li><a href="form_advanced.html">Department List</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fas fa-stethoscope"></i> Donor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
@@ -112,14 +104,22 @@
                   </li>
 
 
-                  <li><a><i class="fa fa-edit"></i> Report <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-bed"></i> Bed Manager <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-edit"></i> Noticeboard <span class="fa fa-chevron-down"></span></a>
+
+                  <li><a><i class="fas fa-edit"></i> Report <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="form.html">Add Department</a></li>
+                      <li><a href="form_advanced.html">Department List</a></li>
+                    </ul>
+                  </li>
+
+                  <li><a><i class="fas fa-edit"></i> Noticeboard <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
