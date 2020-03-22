@@ -16,3 +16,4 @@ Route::get('/', 'HomeController@index' );
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index');
+Route::resource('department', 'DepartmentController');
