@@ -1,6 +1,5 @@
     <script src="/js/all.js"></script>
-	@yield('script')
-	<script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
     <script src="/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
@@ -16,5 +15,6 @@
     <script src="/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="/vendors/pdfmake/build/vfs_fonts.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    @yield('script')
   </body>
 </html>
