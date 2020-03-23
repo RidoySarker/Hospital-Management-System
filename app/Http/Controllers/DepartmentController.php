@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Department;
 use Illuminate\Http\Request;
-
 class DepartmentController extends Controller
 {
     /**
@@ -14,7 +13,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.department.index');
     }
 
     /**
@@ -24,7 +23,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        //
+        $dept['data'] = Department::get();
+        return view('admin.department.list', $dept);
     }
 
     /**
@@ -35,7 +35,30 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'dept_name'    => 'required',
+            'dept_details' => 'required',
+        ]);
+        $data = [
+            'dept_name'    => $request->dept_name,
+            'dept_details' => $request->dept_details,
+        ];
+        $id = $request->dept_id;
+        if($id) {
+            Department::where('dept_id', $id)->update($data);
+            $response = [
+                'msgtype' => 'success',
+                'message' => 'Data Updated Successfully',
+            ];
+            echo json_encode($response);
+        } else {
+            Department::create($data);
+            $response = [
+                'msgtype' => 'success',
+                'message' => 'Data Inserted Successfully',
+            ];
+            echo json_encode($response);
+        }
     }
 
     /**
@@ -55,9 +78,10 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Department $department)
+    public function edit($id)
     {
-        //
+        $data = Department::find($id);
+        echo json_encode($data);
     }
 
     /**
@@ -67,7 +91,7 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request)
     {
         //
     }
@@ -78,8 +102,13 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Department $department)
+    public function destroy($id)
     {
-        //
+        Department::where('dept_id', $id)->delete();
+        $response = [
+            'msgtype' => 'success',
+            'message' => 'Data Deleted Successfully',
+        ];
+        echo json_encode($response);
     }
 }

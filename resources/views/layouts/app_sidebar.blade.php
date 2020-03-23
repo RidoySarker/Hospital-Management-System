@@ -33,8 +33,7 @@
                 </li>
                   <li><a><i class="fas fa-sitemap"></i> Department <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="{{url('department')}}">Department List</a></li>
                     </ul>
                   </li>
 
