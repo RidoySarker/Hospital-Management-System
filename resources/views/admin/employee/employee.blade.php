@@ -64,22 +64,38 @@
     $("#datalist").on("click", ".delete", function() {
       var data = $(this).attr("data");
 
-      $.ajax({
-        url: "{{url('employee')}}" + "/" + data,
-        data: {
-          _token: "{{ csrf_token() }}"
-        },
-        type: "delete",
-        dataType: "json",
-        success: function(data) {
-          if (data.msgtype == "success") {
-            toastr["success"](data.message);
-            loaddata();
-          } else {
-            toastr["error"](data.message);
-          }
-        }
-      });
+      swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+
+              $.ajax({
+                url: "{{url('employee')}}" + "/" + data,
+                data: {
+                  _token: "{{ csrf_token() }}"
+                },
+                type: "delete",
+                dataType: "json",
+                success: function(data) {
+                  if (data.msgtype == "success") {
+                    toastr["success"](data.message);
+                    loaddata();
+                  } else {
+                    toastr["error"](data.message);
+                  }
+                }
+              });
+
+            } else {
+              swal("Your Data is safe!");
+            }
+          });
+
     });
     loaddata();
   });

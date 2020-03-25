@@ -14,6 +14,8 @@
     <script src="/vendors/jszip/dist/jszip.min.js"></script>
     <script src="/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="sweetalert.min.js"></script>
+    
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @yield('script')
     {!! Toastr::message() !!}

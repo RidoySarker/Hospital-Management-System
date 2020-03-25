@@ -196,7 +196,15 @@
 
     $("#datalist").on("click", ".delete", function() {
       var data = $(this).attr("data");
-
+      swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
       $.ajax({
         url: "{{url('employee_role')}}" + "/" + data,
         data: {
@@ -213,6 +221,10 @@
           }
         }
       });
+    } else {
+      swal("Your Data is safe!");
+    }
+  });
     });
     loaddata();
   });
