@@ -18,11 +18,15 @@ class CreateEmployeesTable extends Migration
             $table->string('emp_name', 110);
             $table->string('emp_phone', 110);
             $table->string('emp_address', 110);
+            $table->integer('emp_sex');
             $table->string('emp_email', 110);
             $table->string('emp_password', 220);
             $table->string('emp_img', 110);
-            $table->integer('emp_role_id');
+            $table->unsignedBigInteger('emp_role_id');
             $table->timestamps();
+            $table->foreign('emp_role_id')
+                ->references('role_id')->on('employee_roles')
+                ->onDelete('cascade');
         });
     }
 

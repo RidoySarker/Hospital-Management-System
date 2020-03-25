@@ -16,5 +16,6 @@
     <script src="/vendors/pdfmake/build/vfs_fonts.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     @yield('script')
+    {!! Toastr::message() !!}
   </body>
 </html>
