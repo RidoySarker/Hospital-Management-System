@@ -17,3 +17,7 @@ Auth::routes();
 
 Route::get('/admin', 'HomeController@index');
 Route::resource('department', 'DepartmentController');
+Route::resource('employee', 'EmployeeController');
+Route::get('employees', 'EmployeeController@list')->name('employee.list');
+Route::post('employee/{id}/update', 'EmployeeController@update')->name('employee.update');
+Route::resource('employee_role', 'EmployeeRoleController');
