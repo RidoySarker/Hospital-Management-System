@@ -54,7 +54,7 @@
                         <th>Address</th>
                         <th>Schedule</th>
                         <th>Email</th>
-                        <th>Profile</th>
+                        <th>Department</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -62,15 +62,18 @@
                       @foreach($data as $key => $value)
                       <tr>
                         <td>{{$key+1}}</td>
-                        <td>
-                        <img src="{{ $value->doc_img }}" alt="" height="100">
+                        <td style="width:70px">
+                        <img style="height:55px;width: 60px;" src="{{ $value->doc_img }}" alt="" height="100" class='img-responsive img-circle'>
                         </td>
                         <td>{{ $value->doc_name }}</td>
                         <td>{{ $value->doc_phone }}</td>
                         <td>{{ $value->doc_address }}</td>
                         <td>{{ $value->doc_schedule }}</td>
                         <td>{{ $value->doc_email }}</td>
-                        <td>{{ $value->doc_profile }}</td>
+                        <td>
+                          @php $data=collect($dept)->where('dept_id', $value->doc_dept_id)->first(); @endphp
+                          {{ $data->dept_name }}
+                        </td>
                         <td>
                           <a method="GET" href="{{url('doctor/'.$value->doc_id.'/edit')}}">
                             <button class="btn btn-btn btn-outline-info btn-sm"><i class="fa fa-edit"></i></button>

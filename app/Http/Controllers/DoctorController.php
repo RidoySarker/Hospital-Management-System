@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use DB;
 use Session;
 use File;
+use Toastr;
 
 class DoctorController extends Controller
 {
@@ -50,6 +51,7 @@ class DoctorController extends Controller
             'doc_email'    => 'required|email',
             'doc_password' => 'required',
             'doc_profile'  => 'required',
+            'doc_dept_id'  => 'required',
             'doc_img'      => 'required'
         ]);
         if($request->hasFile('doc_img')) {
@@ -70,7 +72,7 @@ class DoctorController extends Controller
             'doc_img'      => $image
         ];
         Doctor::create($data);
-        Session::flash("success", "Data Inserted Successfully");
+        Toastr::success('Added Successfully', 'Success', ["positionClass" => "toast-top-right"]);
         return back();
     }
 
@@ -143,8 +145,8 @@ class DoctorController extends Controller
             ];
         }
         Doctor::where('doc_id', $id)->update($data);
-        Session::flash("success", "Data Updated Successfully");
-        return redirect()->route('doctor.index' , $id);
+        Toastr::success('Updated Successfully', 'Success', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
