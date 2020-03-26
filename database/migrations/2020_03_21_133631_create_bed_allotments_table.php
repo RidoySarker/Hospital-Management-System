@@ -21,12 +21,12 @@ class CreateBedAllotmentsTable extends Migration
             $table->date('bed_allot_discharge');
             $table->integer('patients_p_id');
             $table->timestamps();
-            // $table->foreign('bed_allot_p_id')
-            //     ->references('p_id')->on('patients')
-            //     ->onDelete('cascade');
-            // $table->foreign('bed_allot_bed_id')
-            //     ->references('bed_id')->on('beds')
-            //     ->onDelete('cascade');
+            $table->foreign('bed_allot_p_id')
+                ->references('p_id')->on('patients')
+                ->onDelete('cascade');
+            $table->foreign('bed_allot_bed_id')
+                ->references('bed_id')->on('beds')
+                ->onDelete('cascade');
         });
     }
 
