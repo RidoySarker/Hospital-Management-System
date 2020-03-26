@@ -39,8 +39,8 @@
 
                   <li><a><i class="fas fa-edit"></i> Doctor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="{{route('doctor.create')}}">Add Doctor</a></li>
+                      <li><a href="{{url('doctor')}}">Doctor List</a></li>
                     </ul>
                   </li>
 
