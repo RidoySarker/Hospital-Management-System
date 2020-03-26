@@ -46,8 +46,8 @@
 
                   <li><a><i class="fas fa-edit"></i> Patient <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="{{url('patient/create')}}">Add Patient</a></li>
+                      <li><a href="{{url('patient')}}">Patient List</a></li>
                     </ul>
                   </li>
 
@@ -66,7 +66,7 @@
                   </li>
 
 
-                  <li><a><i class="fas fa-users"></i> Human Resources Management<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-users"></i> HRM <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{route('employee_role.index')}}">Employee Roles</a></li>
                       <li><a href="{{route('employee.index')}}">Employee List</a></li>
