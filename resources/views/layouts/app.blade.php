@@ -4,12 +4,3 @@
 @yield('content')
 @include('layouts.app_footer')
 @include('layouts.app_js')
-
-
-
-
-
-
-
-
-  
