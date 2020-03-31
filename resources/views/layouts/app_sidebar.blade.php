@@ -51,17 +51,17 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-clock"></i> Schedule <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> Schedule <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="{{url('schedule/create')}}">Add Schedule</a></li>
+                      <li><a href="{{url('schedule')}}">Schedule List</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fas fa-user-md"></i> Appointment <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="{{ url('appointment/create') }}">Add Appointment</a></li>
+                      <li><a href="{{ url('appointment') }}">Appointment List</a></li>
                     </ul>
                   </li>
 

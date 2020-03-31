@@ -47,8 +47,6 @@ class DoctorController extends Controller
             'doc_name'           => 'required',
             'doc_phone'          => 'required',
             'doc_address'        => 'required',
-            'doc_start_schedule' => 'required',
-            'doc_end_schedule'   => 'required',
             'doc_email'          => 'required|email',
             'doc_password'       => 'required',
             'doc_profile'        => 'required',
@@ -65,8 +63,6 @@ class DoctorController extends Controller
             'doc_name'           => $request->doc_name,
             'doc_phone'          => $request->doc_phone,
             'doc_address'        => $request->doc_address,
-            'doc_start_schedule' => $request->doc_start_schedule,
-            'doc_end_schedule'   => $request->doc_end_schedule,
             'doc_email'          => $request->doc_email,
             'doc_password'       => Hash::make($request->doc_password),
             'doc_profile'        => $request->doc_profile,
@@ -115,8 +111,6 @@ class DoctorController extends Controller
             'doc_name'           => 'required',
             'doc_phone'          => 'required',
             'doc_address'        => 'required',
-            'doc_start_schedule' => 'required',
-            'doc_end_schedule'   => 'required',
             'doc_profile'        => 'required'
         ]);
         if($request->hasFile('doc_img')) {
@@ -132,8 +126,6 @@ class DoctorController extends Controller
                 'doc_name'           => $request->doc_name,
                 'doc_phone'          => $request->doc_phone,
                 'doc_address'        => $request->doc_address,
-                'doc_start_schedule' => $request->doc_start_schedule,
-                'doc_end_schedule'   => $request->doc_end_schedule,
                 'doc_profile'        => $request->doc_profile,
                 'doc_dept_id'        => $request->doc_dept_id,
                 'doc_img'            => $image
@@ -143,8 +135,6 @@ class DoctorController extends Controller
                 'doc_name'           => $request->doc_name,
                 'doc_phone'          => $request->doc_phone,
                 'doc_address'        => $request->doc_address,
-                'doc_start_schedule' => $request->doc_start_schedule,
-                'doc_end_schedule'   => $request->doc_end_schedule,
                 'doc_profile'        => $request->doc_profile,
                 'doc_dept_id'        => $request->doc_dept_id
             ];
@@ -163,7 +153,7 @@ class DoctorController extends Controller
     public function destroy($id)
     {
         Doctor::where('doc_id', $id)->delete();
-        Session::flash("success", "Data Deleted Successfully");
+        Toastr::success('Deleted Successfully', 'Success', ["positionClass" => "toast-top-right"]);
         return back();
     }
 }

@@ -1,11 +1,11 @@
 @extends('layouts.app')
-@section('title') Doctor | HMS @endsection
+@section('title') Appointment | HMS @endsection
 @section('content')
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Doctor</h3>
+        <h3>Appointment</h3>
       </div>
 
       <div class="title_right">
@@ -23,7 +23,7 @@
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Doctor list</h2>
+            <h2>Appointment list</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -48,40 +48,35 @@
                     <thead>
                       <tr>
                         <th>Sl</th>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Phone</th>
+                        <th>Start Schedule</th>
+                        <th>End Schedule</th>
                         <th>Email</th>
                         <th>Department</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach($data as $key => $value)
                       <tr>
-                        <td>{{$key+1}}</td>
-                        <td style="width:70px">
-                        <img style="height:55px;width: 60px;" src="{{ $value->doc_img }}" alt="" height="100" class='img-responsive img-circle'>
-                        </td>
-                        <td>{{ $value->doc_name }}</td>
-                        <td>{{ $value->doc_phone }}</td>
-                        <td>{{ $value->doc_email }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
-                          @php $data=collect($dept)->where('dept_id', $value->doc_dept_id)->first(); @endphp
-                          {{ $data->dept_name }}
-                        </td>
-                        <td>
-                          <a method="GET" href="{{url('doctor/'.$value->doc_id.'/edit')}}">
+                          <a method="GET" href="">
                             <button class="btn btn-btn btn-outline-info btn-sm"><i class="fa fa-edit"></i></button>
                           </a>
-                          <form method="POST" action="{{route('doctor.destroy' , $value->doc_id)}}">
+                          <form method="POST" action="">
                             @csrf
                             @method("DELETE")
                             <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
                           </form>
                         </td>
                       </tr>
-                      @endforeach
                     </tbody>
                   </table>
                 </div>
