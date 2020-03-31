@@ -21,6 +21,8 @@ Route::resource('department', 'DepartmentController');
 
 Route::resource('doctor', 'DoctorController');
 
+Route::resource('patient', 'PatientController');
+
 Route::resource('employee', 'EmployeeController');
 Route::get('employees', 'EmployeeController@list')->name('employee.list');
 Route::post('employee/{id}/update', 'EmployeeController@update')->name('employee.update');

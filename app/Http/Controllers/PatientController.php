@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Patient;
 use Illuminate\Http\Request;
+use App\Doctor;
+use Session;
+use File;
+use Toastr;
 
 class PatientController extends Controller
 {
@@ -13,8 +17,9 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $patient['p_data'] = Patient::orderBy('p_id','desc')->get();
+        return view('admin.patient.patient_list',$patient);
     }
 
     /**
@@ -24,7 +29,9 @@ class PatientController extends Controller
      */
     public function create()
     {
-        //
+        
+        $doctor['d_data'] = Doctor::orderBy('doc_id', 'desc')->get();
+        return view('admin.patient.add_patient',$doctor);
     }
 
     /**
@@ -35,7 +42,49 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'p_name' => 'required',
+            'p_age' => 'required',
+            'p_address' => 'required',
+            'p_phone' => 'required',
+            'p_sex' => 'required',
+            'p_blood' => 'required',
+            'p_doc_id' => 'required'
+        ]);
+        if ($request->hasFile('p_img')) {
+
+           $input_image=$request->file('p_img')->getClientOriginalExtension();
+           $path= "images/patient";
+           $img_name = 'p_'.time().".".$input_image;
+           $image = $request->file('p_img')->move($path,$img_name);
+           $input= [
+             'p_name' => $request->p_name,
+             'p_age' => $request->p_age,
+             'p_address' => $request->p_address,
+             'p_sex' => $request->p_sex,
+             'p_phone' => $request->p_phone,
+             'p_blood' => $request->p_blood,
+             'p_doc_id' => $request->p_doc_id,
+             'p_img'  => $image
+           ];
+        }
+        else{
+           $input= [
+             'p_name' => $request->p_name,
+             'p_age' => $request->p_age,
+             'p_address' => $request->p_address,
+             'p_sex' => $request->p_sex,
+             'p_phone' => $request->p_phone,
+             'p_blood' => $request->p_blood,
+             'p_doc_id' => $request->p_doc_id,
+             'p_img'  => ''
+           ];
+
+        }
+        Patient::create($input);
+        Toastr::success('Patient Added Successfully', 'Success');
+        return back();
+
     }
 
     /**
@@ -57,7 +106,9 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        //
+        
+         $doctor['d_data'] = Doctor::orderBy('doc_id', 'desc')->get();
+        return view('admin.patient.edit_patient',$doctor,compact('patient'));
     }
 
     /**
@@ -67,10 +118,52 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, $id)
     {
-        //
-    }
+        $request->validate([
+            'p_name' => 'required',
+            'p_age' => 'required',
+            'p_address' => 'required',
+            'p_phone' => 'required',
+            'p_sex' => 'required',
+            'p_blood' => 'required',
+            'p_doc_id' => 'required'
+        ]);
+        if ($request->hasFile('p_img')) {
+
+        if ($request->old_image!='') {
+          unlink($request->old_image);
+        }
+           $input_image=$request->file('p_img')->getClientOriginalExtension();
+           $path= "images/patient";
+           $img_name = 'p_'.time().".".$input_image;
+           $image = $request->file('p_img')->move($path,$img_name);
+           $input= [
+             'p_name' => $request->p_name,
+             'p_age' => $request->p_age,
+             'p_address' => $request->p_address,
+             'p_sex' => $request->p_sex,
+             'p_phone' => $request->p_phone,
+             'p_blood' => $request->p_blood,
+             'p_doc_id' => $request->p_doc_id,
+             'p_img'  => $image
+           ];
+        }
+        else{
+           $input= [
+             'p_name' => $request->p_name,
+             'p_age' => $request->p_age,
+             'p_address' => $request->p_address,
+             'p_sex' => $request->p_sex,
+             'p_phone' => $request->p_phone,
+             'p_blood' => $request->p_blood,
+             'p_doc_id' => $request->p_doc_id,
+           ];
+
+        }
+        Patient::where('p_id',$id)->update($input);
+        Toastr::success('Patient Update Successfully', 'Success');
+        return back();    }
 
     /**
      * Remove the specified resource from storage.
@@ -80,6 +173,8 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        //
+        $patient->delete();
+        Toastr::success('Patient Delete Successfully', 'Success');
+        return back();
     }
 }

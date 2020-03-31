@@ -69,11 +69,20 @@
                             </div>
 
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="schedule">Doctor Schedule <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="schedule">Start Schedule <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="text" id="schedule" name="doc_schedule" class="form-control" placeholder="Enter Schedule" value="{{ $doctor->doc_schedule }}">
-                                    <p class="text-danger">{{$errors->first('doc_schedule')}}</p>
+                                    <input type="text" id="schedule" name="doc_start_schedule" class="form-control" placeholder="Enter Schedule" value="{{ $doctor->doc_start_schedule }}">
+                                    <p class="text-danger">{{$errors->first('doc_start_schedule')}}</p>
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="schedule">Start Schedule <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="schedule" name="doc_end_schedule" class="form-control" placeholder="Enter Schedule" value="{{ $doctor->doc_end_schedule }}">
+                                    <p class="text-danger">{{$errors->first('doc_end_schedule')}}</p>
                                 </div>
                             </div>
 

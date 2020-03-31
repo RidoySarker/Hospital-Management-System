@@ -44,15 +44,16 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'doc_name'     => 'required',
-            'doc_phone'    => 'required',
-            'doc_address'  => 'required',
-            'doc_schedule' => 'required',
-            'doc_email'    => 'required|email',
-            'doc_password' => 'required',
-            'doc_profile'  => 'required',
-            'doc_dept_id'  => 'required',
-            'doc_img'      => 'required'
+            'doc_name'           => 'required',
+            'doc_phone'          => 'required',
+            'doc_address'        => 'required',
+            'doc_start_schedule' => 'required',
+            'doc_end_schedule'   => 'required',
+            'doc_email'          => 'required|email',
+            'doc_password'       => 'required',
+            'doc_profile'        => 'required',
+            'doc_dept_id'        => 'required',
+            'doc_img'            => 'required'
         ]);
         if($request->hasFile('doc_img')) {
             $image_type = $request->file('doc_img')->getClientOriginalExtension();
@@ -61,15 +62,16 @@ class DoctorController extends Controller
             $image = $request->file('doc_img')->move($path,$name);
         }
         $data = [
-            'doc_name'     => $request->doc_name,
-            'doc_phone'    => $request->doc_phone,
-            'doc_address'  => $request->doc_address,
-            'doc_schedule' => $request->doc_schedule,
-            'doc_email'    => $request->doc_email,
-            'doc_password' => Hash::make($request->doc_password),
-            'doc_profile'  => $request->doc_profile,
-            'doc_dept_id'  => $request->doc_dept_id,
-            'doc_img'      => $image
+            'doc_name'           => $request->doc_name,
+            'doc_phone'          => $request->doc_phone,
+            'doc_address'        => $request->doc_address,
+            'doc_start_schedule' => $request->doc_start_schedule,
+            'doc_end_schedule'   => $request->doc_end_schedule,
+            'doc_email'          => $request->doc_email,
+            'doc_password'       => Hash::make($request->doc_password),
+            'doc_profile'        => $request->doc_profile,
+            'doc_dept_id'        => $request->doc_dept_id,
+            'doc_img'            => $image
         ];
         Doctor::create($data);
         Toastr::success('Added Successfully', 'Success', ["positionClass" => "toast-top-right"]);
@@ -110,11 +112,12 @@ class DoctorController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'doc_name'     => 'required',
-            'doc_phone'    => 'required',
-            'doc_address'  => 'required',
-            'doc_schedule' => 'required',
-            'doc_profile'  => 'required'
+            'doc_name'           => 'required',
+            'doc_phone'          => 'required',
+            'doc_address'        => 'required',
+            'doc_start_schedule' => 'required',
+            'doc_end_schedule'   => 'required',
+            'doc_profile'        => 'required'
         ]);
         if($request->hasFile('doc_img')) {
             $image_type = $request->file('doc_img')->getClientOriginalExtension();
@@ -126,22 +129,24 @@ class DoctorController extends Controller
                 File::delete(Doctor::findOrFail($id)->doc_img);
             }
             $data = [
-                'doc_name'     => $request->doc_name,
-                'doc_phone'    => $request->doc_phone,
-                'doc_address'  => $request->doc_address,
-                'doc_schedule' => $request->doc_schedule,
-                'doc_profile'  => $request->doc_profile,
-                'doc_dept_id'  => $request->doc_dept_id,
-                'doc_img'      => $image
+                'doc_name'           => $request->doc_name,
+                'doc_phone'          => $request->doc_phone,
+                'doc_address'        => $request->doc_address,
+                'doc_start_schedule' => $request->doc_start_schedule,
+                'doc_end_schedule'   => $request->doc_end_schedule,
+                'doc_profile'        => $request->doc_profile,
+                'doc_dept_id'        => $request->doc_dept_id,
+                'doc_img'            => $image
             ];
         } else {
             $data = [
-                'doc_name'     => $request->doc_name,
-                'doc_phone'    => $request->doc_phone,
-                'doc_address'  => $request->doc_address,
-                'doc_schedule' => $request->doc_schedule,
-                'doc_profile'  => $request->doc_profile,
-                'doc_dept_id'  => $request->doc_dept_id
+                'doc_name'           => $request->doc_name,
+                'doc_phone'          => $request->doc_phone,
+                'doc_address'        => $request->doc_address,
+                'doc_start_schedule' => $request->doc_start_schedule,
+                'doc_end_schedule'   => $request->doc_end_schedule,
+                'doc_profile'        => $request->doc_profile,
+                'doc_dept_id'        => $request->doc_dept_id
             ];
         }
         Doctor::where('doc_id', $id)->update($data);

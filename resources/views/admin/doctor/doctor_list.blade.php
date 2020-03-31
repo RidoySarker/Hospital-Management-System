@@ -51,8 +51,8 @@
                         <th>Image</th>
                         <th>Name</th>
                         <th>Phone</th>
-                        <th>Address</th>
-                        <th>Schedule</th>
+                        <th>Start Schedule</th>
+                        <th>End Schedule</th>
                         <th>Email</th>
                         <th>Department</th>
                         <th>Action</th>
@@ -67,8 +67,8 @@
                         </td>
                         <td>{{ $value->doc_name }}</td>
                         <td>{{ $value->doc_phone }}</td>
-                        <td>{{ $value->doc_address }}</td>
-                        <td>{{ $value->doc_schedule }}</td>
+                        <td>{{ $value->doc_start_schedule }}</td>
+                        <td>{{ $value->doc_end_schedule }}</td>
                         <td>{{ $value->doc_email }}</td>
                         <td>
                           @php $data=collect($dept)->where('dept_id', $value->doc_dept_id)->first(); @endphp
