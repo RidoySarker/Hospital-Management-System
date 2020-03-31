@@ -18,7 +18,8 @@ class CreateDoctorsTable extends Migration
             $table->string('doc_name', 110);
             $table->string('doc_phone', 45);
             $table->string('doc_address', 110);
-            $table->string('doc_schedule', 110);
+            $table->string('doc_start_schedule', 110);
+            $table->string('doc_end_schedule', 110);
             $table->string('doc_email', 110);
             $table->string('doc_password', 110);
             $table->string('doc_profile', 110);
