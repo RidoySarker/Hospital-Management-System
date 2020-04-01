@@ -16,8 +16,9 @@ class CreateBedsTable extends Migration
         Schema::create('beds', function (Blueprint $table) {
             $table->bigIncrements('bed_id');
             $table->unsignedBigInteger('bed_category_id');
-            $table->integer('bed_quantity');
-            $table->string('bed_details', 110);
+            $table->integer('bed_capacity');
+            $table->string('bed_charge', 110);
+            $table->string('bed_status', 50);
             $table->timestamps();
             $table->foreign('bed_category_id')
                 ->references('bed_category_id')->on('bed_categories')

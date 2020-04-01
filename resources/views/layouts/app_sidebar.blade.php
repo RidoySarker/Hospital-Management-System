@@ -109,6 +109,8 @@
                     <ul class="nav child_menu">
                       <li><a href="{{ route('bed_category.create') }}">Add Bed Category</a></li>
                       <li><a href="{{ url('bed_category') }}">Bed Category List</a></li>
+                      <li><a href="{{ route('bed.create') }}">Add Bed</a></li>
+                      <li><a href="{{ url('bed') }}">Bed List</a></li>
                     </ul>
                   </li>
 
