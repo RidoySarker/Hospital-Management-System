@@ -46,6 +46,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Sl</th>
+                                                <th>PID</th>
                                                 <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Age</th>
@@ -61,6 +62,7 @@
                                             @foreach($p_data as $key => $value)
                                             <tr>
                                                 <td>{{$key+1}}</td>
+                                                <td>{{$value->p_s}}</td>
                                                 <td style="width:70px"><img id='previmage' style="height:55px;width:55px;" src="@if($value->p_img) /{{$value->p_img}} @else {{'/images/avatar.jpg'}} @endif" alt="your image" class='img-responsive img-circle'></td>
                                                 <td>{{ $value->p_name }}</td>
                                                 <td>{{ $value->p_age }}</td>

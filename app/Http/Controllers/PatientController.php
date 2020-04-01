@@ -19,7 +19,7 @@ class PatientController extends Controller
      */
     public function index()
     {   
-        $patient['p_data'] = Patient::orderBy('p_id','desc')->get();
+        $patient['p_data'] = Patient::get();
         return view('admin.patient.patient_list',$patient);
     }
 
