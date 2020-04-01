@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Bed;
+use App\Bed_categorie;
 use Illuminate\Http\Request;
+use Validator;
+use Toastr;
 
 class BedController extends Controller
 {
@@ -14,7 +17,9 @@ class BedController extends Controller
      */
     public function index()
     {
-        //
+        $data['bed'] = Bed::get();
+        $data['bed_category'] = Bed_categorie::get();
+        return view('admin.bed.bed_list', $data);
     }
 
     /**
@@ -24,7 +29,8 @@ class BedController extends Controller
      */
     public function create()
     {
-        //
+        $data['bed_category'] = Bed_categorie::get();
+        return view('admin.bed.add_bed', $data);
     }
 
     /**
@@ -35,7 +41,16 @@ class BedController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Bed;
+        $all_data = $request->all();
+        $validate = Validator::make($all_data, $model->validation());
+        if($validate->fails()) {
+            Toastr::warning('Validation Failed', '', ["positionClass" => "toast-top-right"]);
+            return back()->withErrors($validate)->withInput($all_data);
+        }
+        $model->fill($all_data)->save();
+        Toastr::success('Added Successfully', '', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -55,9 +70,11 @@ class BedController extends Controller
      * @param  \App\Bed  $bed
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bed $bed)
+    public function edit($id)
     {
-        //
+        $data['bed'] = Bed::findOrFail($id);
+        $data['bed_category'] = Bed_categorie::get();
+        return view('admin.bed.edit_bed', $data);
     }
 
     /**
@@ -67,9 +84,18 @@ class BedController extends Controller
      * @param  \App\Bed  $bed
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bed $bed)
+    public function update(Request $request, $id)
     {
-        //
+        $model = Bed::findOrFail($id);
+        $all_data = $request->all();
+        $validate = Validator::make($all_data, $model->validation());
+        if($validate->fails()) {
+            Toastr::warning('Validation Failed', '', ["positionClass" => "toast-top-right"]);
+            return back()->withErrors($validate)->withInput($all_data);
+        }
+        $model->fill($all_data)->save();
+        Toastr::success('Update Successfully', '', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -78,8 +104,10 @@ class BedController extends Controller
      * @param  \App\Bed  $bed
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bed $bed)
+    public function destroy($id)
     {
-        //
+        Bed::where('bed_id', $id)->delete();
+        Toastr::success('Deleted Successfully', '', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }
