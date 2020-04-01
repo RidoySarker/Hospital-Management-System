@@ -29,4 +29,5 @@ Route::post('employee/{id}/update', 'EmployeeController@update')->name('employee
 Route::resource('employee_role', 'EmployeeRoleController');
 Route::resource('schedule', 'ScheduleController');
 Route::resource('appointment', 'AppointmentController');
+Route::resource('bed_category', 'BedCategorieController');
 
