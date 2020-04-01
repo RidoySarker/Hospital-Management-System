@@ -107,8 +107,8 @@
 
                   <li><a><i class="fas fa-bed"></i> Bed Manager <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="{{ route('bed_category.create') }}">Add Bed Category</a></li>
+                      <li><a href="{{ url('bed_category') }}">Bed Category List</a></li>
                     </ul>
                   </li>
 
