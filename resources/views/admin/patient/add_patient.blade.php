@@ -62,12 +62,12 @@
                                 <div class="col-md-9 col-sm-9 ">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" class="radio" name="p_sex" value="1"> Male
+                                            <input type="radio" class="radio" name="p_sex" value="1" required="required"> Male
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" class="radio" name="p_sex" value="2"> Female
+                                            <input type="radio" class="radio" name="p_sex" value="2" required="required"> Female
                                         </label>
                                     </div>
                                     <p class="text-danger">{{$errors->first('p_sex')}}</p>
@@ -78,8 +78,8 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Blood Group<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <select class="form-control" name="p_blood">
-                                        <option>-----Choose Blood Group-----</option>
+                                    <select class="form-control" name="p_blood" required="required">
+                                        <option selected hidden>-----Choose Blood Group-----</option>
                                         <option value="A+"> A+ </option>
                                         <option value="A-"> A- </option>
                                         <option value="B+"> B+ </option>
@@ -96,8 +96,8 @@
                             <div class="field item form-group">
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Doctor<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
-                                    <select class="form-control" name="p_doc_id">
-                                        <option>-----Choose Doctor-----</option>
+                                    <select class="form-control" name="p_doc_id" required="required">
+                                        <option selected hidden>-----Choose Doctor-----</option>
                                         @foreach($d_data as $values)
                                         <option value="{{$values->doc_id}}">{{$values->doc_name}}</option>
                                         @endforeach

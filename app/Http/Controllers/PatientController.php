@@ -8,6 +8,7 @@ use App\Doctor;
 use Session;
 use File;
 use Toastr;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class PatientController extends Controller
 {
@@ -42,6 +43,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+        $id = IdGenerator::generate(['table' => 'patients', 'length' => 8, 'prefix' =>'PAT']);
         $request->validate([
             'p_name' => 'required',
             'p_age' => 'required',
@@ -58,6 +60,7 @@ class PatientController extends Controller
            $img_name = 'p_'.time().".".$input_image;
            $image = $request->file('p_img')->move($path,$img_name);
            $input= [
+             'p_s' => $id,
              'p_name' => $request->p_name,
              'p_age' => $request->p_age,
              'p_address' => $request->p_address,
@@ -70,6 +73,7 @@ class PatientController extends Controller
         }
         else{
            $input= [
+             'p_s' => $id,
              'p_name' => $request->p_name,
              'p_age' => $request->p_age,
              'p_address' => $request->p_address,

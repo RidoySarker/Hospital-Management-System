@@ -11,6 +11,7 @@
         "php": "^7.2",
         "brian2694/laravel-toastr": "^5.5",
         "fideloper/proxy": "^4.0",
+        "haruncpi/laravel-id-generator": "^1.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "realrashid/sweet-alert": "^3.1"
