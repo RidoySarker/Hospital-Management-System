@@ -15,18 +15,13 @@
                 <img src="{{asset('images/img.jpg')}}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
+                <span>Welcome</span>
                 <h2>{{Auth::user()->name}}</h2>
               </div>
             </div>
-            <!-- /menu profile quick info -->
-
             <br />
-
-            <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-
                 <ul class="nav side-menu">
                 <li><a href="/"><i class="fas fa-home"></i> Dashboard </a>
 
@@ -37,7 +32,7 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-edit"></i> Doctor <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-user-md"></i> Doctor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{route('doctor.create')}}">Add Doctor</a></li>
                       <li><a href="{{url('doctor')}}">Doctor List</a></li>
@@ -111,6 +106,8 @@
                       <li><a href="{{ url('bed_category') }}">Bed Category List</a></li>
                       <li><a href="{{ route('bed.create') }}">Add Bed</a></li>
                       <li><a href="{{ url('bed') }}">Bed List</a></li>
+                      <li><a href="{{ route('bed_allotment.create') }}">Add Bed Allotment</a></li>
+                      <li><a href="{{ url('bed_allotment') }}">Bed Allotment List</a></li>
                     </ul>
                   </li>
 
@@ -131,11 +128,8 @@
 
                 </ul>
               </div>
-
             </div>
-            <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -150,6 +144,5 @@
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
-            <!-- /menu footer buttons -->
           </div>
         </div>

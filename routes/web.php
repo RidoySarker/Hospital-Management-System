@@ -31,4 +31,8 @@ Route::resource('schedule', 'ScheduleController');
 Route::resource('appointment', 'AppointmentController');
 Route::resource('bed_category', 'BedCategorieController');
 Route::resource('bed', 'BedController');
+Route::resource('bed_allotment', 'BedAllotmentController');
+Route::get('get_patient_name/{patient_id}', 'BedAllotmentController@get_patient_name');
+Route::get('get_bed_quantity/{quantity_id}', 'BedAllotmentController@get_bed_quantity');
+Route::get('list/{quantity_id}', 'BedAllotmentController@list');
 
