@@ -61,7 +61,10 @@
                       <tr>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $value->bed_allot_p_id }}</td>
-                        <td>{{ $value->bed_allot_category_id }}</td>
+                        <td>
+                            @php $data = collect($bed_category)->where('bed_category_id', $value->bed_allot_category_id)->first() @endphp
+                            {{ $data->bed_category_name }}
+                        </td>
                         <td>{{ $value->bed_allot_start }}</td>
                         <td>{{ $value->bed_allot_discharge }}</td>
                         <td>{{ $value->bed_allot_status }}</td>
