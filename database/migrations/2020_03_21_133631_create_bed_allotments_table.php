@@ -15,17 +15,14 @@ class CreateBedAllotmentsTable extends Migration
     {
         Schema::create('bed_allotments', function (Blueprint $table) {
             $table->bigIncrements('bed_allot_id');
-            $table->unsignedBigInteger('bed_allot_bed_id');
-            $table->unsignedBigInteger('bed_allot_p_id');
+            $table->string('bed_allot_p_id');
+            $table->unsignedBigInteger('bed_allot_category_id');
             $table->date('bed_allot_start');
             $table->date('bed_allot_discharge');
-            $table->integer('patients_p_id');
+            $table->string('bed_allot_status', 50);
             $table->timestamps();
-            $table->foreign('bed_allot_p_id')
-                ->references('p_id')->on('patients')
-                ->onDelete('cascade');
-            $table->foreign('bed_allot_bed_id')
-                ->references('bed_id')->on('beds')
+            $table->foreign('bed_allot_category_id')
+                ->references('bed_category_id')->on('bed_categories')
                 ->onDelete('cascade');
         });
     }
