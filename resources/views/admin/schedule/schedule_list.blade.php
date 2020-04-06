@@ -73,9 +73,8 @@
                             <button class="btn btn-btn btn-outline-info btn-sm"><i class="fa fa-edit"></i></button>
                           </a>
                           <form method="POST" action="{{route('schedule.destroy', $value->sd_id)}}">
-                            @csrf
-                            @method("DELETE")
-                            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
+                            @csrf @method("DELETE")
+                            <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger btn-sm pull-right" style="margin-top: -36px;"><i class="fa fa-trash-alt"></i></button>
                           </form>
                         </td>
                       </tr>

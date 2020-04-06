@@ -66,7 +66,7 @@
                             <form method="POST" action="{{ route('bed_category.destroy', $value->bed_category_id) }}">
                                 @csrf
                                 @method("DELETE")
-                                <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-alt"></i></button>
                             </form>
                         </td>
                       </tr>
