@@ -61,7 +61,7 @@
                       <tr>
                         <td>{{$key+1}}</td>
                         <td style="width:70px">
-                        <img style="height:55px;width: 60px;" src="{{ $value->doc_img }}" alt="" height="100" class='img-responsive img-circle'>
+                        <img style="height:35px;width: 40px;" src="{{ $value->doc_img }}" alt="" height="100" class='img-responsive img-circle'>
                         </td>
                         <td>{{ $value->doc_name }}</td>
                         <td>{{ $value->doc_phone }}</td>
@@ -75,9 +75,8 @@
                             <button class="btn btn-btn btn-outline-info btn-sm"><i class="fa fa-edit"></i></button>
                           </a>
                           <form method="POST" action="{{route('doctor.destroy' , $value->doc_id)}}">
-                            @csrf
-                            @method("DELETE")
-                            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i></button>
+                            @csrf @method("DELETE")
+                            <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger btn-sm pull-right" style="margin-top: -36px;"><i class="fa fa-trash-alt"></i></button>
                           </form>
                         </td>
                       </tr>
