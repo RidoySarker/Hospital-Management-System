@@ -8,8 +8,8 @@
                 <h3><b>Bed</b></h3>
             </div>
         </div>
-        <a href="{{url('bed')}}">
-            <button style="margin-left: 522px;" class="btn btn-round btn-primary btn-sm">Bed List</button>
+        <a href="{{url('bed_allotment')}}">
+            <button style="margin-left: 460px;" class="btn btn-round btn-primary btn-sm">Bed Allotment List</button>
         </a>
         <div class="clearfix"></div>
 
@@ -38,48 +38,76 @@
                     <div class="x_content">
 
 
-                        <form class="form-horizontal form-label-left" method="POST" action="{{route('bed.update', $bed->bed_id)}}">
+                        <form class="form-horizontal form-label-left" method="POST" action="{{route('bed_allotment.update', $bed_allotment->bed_allot_id)}}">
                             @method("PUT")
                             @csrf
 
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_category_id">Bed Type <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_allot_p_id">Patient <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <select class="form-control" name="bed_category_id" id="bed_category_id">
-                                        <option hidden>Select Option</option>
+                                    <input type="text" id="bed_allot_p_id" name="bed_allot_p_id" class="form-control" placeholder="Enter Details" value="{{ $bed_allotment->bed_allot_p_id }}">
+                                    <p class="text-danger">{{$errors->first('bed_allot_p_id')}}</p>
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Patient Name <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input id="pname" class="form-control">
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_allot_category_id">Bed Type <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select class="form-control" name="bed_allot_category_id" id="bed_allot_category_id">
+                                        <option disabled selected value>Select Option</option>
                                         @foreach($bed_category as $value)
-                                        <option value="{{$value->bed_category_id}}" {{ $value->bed_category_id==$bed->bed_category_id ? 'selected' : '' }}>{{$value->bed_category_name}}</option>
+                                        <option value="{{$value->bed_category_id}}"{{$bed_allotment->bed_allot_category_id==$value->bed_category_id ? 'selected' : ''}}>{{$value->bed_category_name}}</option>
                                         @endforeach
                                     </select>
+                                    <span id="show"></span>
+                                    <p></p>
+                                </div>
+                            </div>
+
+                            <div class="field item form-group" hidden>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align">Bed Quantity <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input id="quantity" class="form-control" disabled>
                                 </div>
                             </div>
 
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_capacity">Bed Capacity <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_allot_start">Assign Date <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="number" id="bed_capacity" name="bed_capacity" class="form-control" placeholder="Enter Details" value="{{ $bed->bed_capacity }}">
-                                    <p class="text-danger">{{$errors->first('bed_capacity')}}</p>
+                                    <input type="date" id="bed_allot_start" name="bed_allot_start" class="form-control cdatepicker" placeholder="Enter Details" value="{{ $bed_allotment->bed_allot_start }}">
+                                    <p class="text-danger">{{$errors->first('bed_allot_start')}}</p>
                                 </div>
                             </div>
 
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_charge">Bed Charge <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_allot_discharge">Discharge Date <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="number" id="bed_charge" name="bed_charge" class="form-control" placeholder="Enter Details" value="{{ $bed->bed_charge }}">
-                                    <p class="text-danger">{{$errors->first('bed_charge')}}</p>
+                                    <input type="date" id="bed_allot_discharge" name="bed_allot_discharge" class="form-control cdatepicker" placeholder="Enter Details" value="{{ $bed_allotment->bed_allot_discharge }}">
+                                    <p class="text-danger">{{$errors->first('bed_allot_discharge')}}</p>
                                 </div>
                             </div>
 
                             <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_status">Status <span class="required">*</span>
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="bed_allot_status">Status <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <select class="form-control" name="bed_status" id="bed_status">
-                                        <option value="Active" {{ $bed->bed_status=='Active' ? 'selected' : '' }}>Active</option>
-                                        <option value="Inactive" {{ $bed->bed_status=='Inactive' ? 'selected' : '' }}>Inactive</option>
+                                    <select class="form-control" name="bed_allot_status" id="bed_allot_status">
+                                        <option value="Active" {{$bed_allotment->bed_allot_status=='Active' ? 'selected' : ''}}>Active</option>
+                                        <option value="Inactive" {{$bed_allotment->bed_allot_status=='Inactive' ? 'selected' : ''}}>Inactive</option>
                                     </select>
                                 </div>
                             </div>
@@ -98,4 +126,59 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        PatientName();
+
+        $("#bed_allot_category_id").change(function() {
+            var data = $(this).val();
+            
+            $.ajax({
+                url     : "/get_bed_quantity/"+data,
+                success: function(data) {
+                    $("#quantity").val(data[0]["bed_capacity"]);
+                }
+            });
+        });
+
+        $("#bed_allot_category_id").change(function() {
+            var category = $("#bed_allot_category_id").val();
+
+            $.ajax({
+                url    : "/list/"+category,
+                success: function(data) {
+                    var i=0;
+                    $(data).each(function(k,v) {
+                        ++i;
+                    });
+                    var quantity = $("#quantity").val();
+                    var available = parseInt(quantity-i);
+                    if(available>0) {
+                        $("#show").html('<font color="green">Bed Available ' +available+'</font>');
+                        $(".submit").attr("disabled", false);
+                    } else{
+                        $("#show").html('<font color="red">Bed Is Not Available</font>');
+                        $(".submit").attr("disabled", true);
+                    }
+                }
+            });
+        });
+
+    });
+
+    function PatientName() {
+        $("#bed_allot_p_id").attr("disabled", true);
+        var data = $("#bed_allot_p_id").val();
+
+        $.ajax({
+            url     : "/get_patient_name/"+data,
+            success: function(data) {
+                $("#pname").removeClass('text-danger').val(data[0]["p_name"]);
+                $("#pname").attr("disabled", true);
+            }
+        });
+    }
+</script>
 @endsection

@@ -20,4 +20,14 @@ class Bed_allotment extends Model
             'bed_allot_status'      => 'required',
         ];
     }
+
+    public function up_validation()
+    {
+        return [
+            'bed_allot_category_id' => 'required',
+            'bed_allot_start'       => 'required',
+            'bed_allot_discharge'   => 'required',
+            'bed_allot_status'      => 'required',
+        ];
+    }
 }

@@ -80,8 +80,7 @@ class BedAllotmentController extends Controller
      */
     public function show()
     {
-        $data = Bed_allotment::where('bed_allot_status', 'Active')->get();
-        return response()->json($data);
+        //
     }
 
     /**
@@ -90,9 +89,11 @@ class BedAllotmentController extends Controller
      * @param  \App\Bed_allotment  $bed_allotment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bed_allotment $bed_allotment)
+    public function edit($id)
     {
-        //
+        $data['bed_allotment'] = Bed_allotment::findOrFail($id);
+        $data['bed_category'] = Bed_categorie::get();
+        return view('admin.bed_allotment.edit_bed_allotment', $data);
     }
 
     /**
@@ -102,9 +103,18 @@ class BedAllotmentController extends Controller
      * @param  \App\Bed_allotment  $bed_allotment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bed_allotment $bed_allotment)
+    public function update(Request $request, $id)
     {
-        //
+        $model = Bed_allotment::findOrFail($id);
+        $all_data = $request->all();
+        $validate = Validator::make($all_data, $model->up_validation());
+        if($validate->fails()) {
+            Toastr::warning('Validation Failed', '', ["positionClass" => "toast-top-right"]);
+            return back()->withErrors($validate)->withInput($all_data);
+        }
+        $model->fill($all_data)->save();
+        Toastr::success('Updated Successfully', 'Success', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
