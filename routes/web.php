@@ -36,3 +36,6 @@ Route::get('get_patient_name/{patient_id}', 'BedAllotmentController@get_patient_
 Route::get('get_bed_quantity/{quantity_id}', 'BedAllotmentController@get_bed_quantity');
 Route::get('list/{quantity_id}', 'BedAllotmentController@list');
 
+Route::resource('donor', 'DonorListController');
+Route::resource('bloodbank', 'BloodBankController');
+

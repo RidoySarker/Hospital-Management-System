@@ -14,7 +14,8 @@ class BloodBankController extends Controller
      */
     public function index()
     {
-        //
+        $blood['blood_data'] = Blood_bank::orderBy('blood_bag_id','desc')->get();
+        return view('admin.donor.bloodbank',$blood);
     }
 
     /**
@@ -35,7 +36,21 @@ class BloodBankController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'blood_bag_name'    => 'required',
+            'blood_bag_quantity' => 'required',
+        ]);
+        $data = [
+            'blood_bag_name'    => $request->blood_bag_name,
+            'blood_bag_quantity' => $request->blood_bag_quantity,
+        ];
+        $id = $request->blood_bag_id;
+            Blood_bank::where('blood_bag_id', $id)->update($data);
+            $response = [
+                'msgtype' => 'success',
+                'message' => 'Data Update Successfully',
+            ];
+            echo json_encode($response);
     }
 
     /**
@@ -55,9 +70,10 @@ class BloodBankController extends Controller
      * @param  \App\Blood_bank  $blood_bank
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blood_bank $blood_bank)
+    public function edit($id)
     {
-        //
+        $data = Blood_bank::find($id);
+        echo json_encode($data);
     }
 
     /**
@@ -69,7 +85,7 @@ class BloodBankController extends Controller
      */
     public function update(Request $request, Blood_bank $blood_bank)
     {
-        //
+
     }
 
     /**

@@ -92,10 +92,11 @@
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-stethoscope"></i> Donor <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-hands"></i> Donor <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="{{route('donor.create')}}">Add Donor</a></li>
+                      <li><a href="{{url('donor')}}">Donor List</a></li>
+                      <li><a href="{{url('bloodbank')}}">Blood Bank</a></li>
                     </ul>
                   </li>
 

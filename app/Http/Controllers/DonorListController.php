@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Donor_list;
 use Illuminate\Http\Request;
-
+use Toastr;
+use Validator;
 class DonorListController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class DonorListController extends Controller
      */
     public function index()
     {
-        //
+        $donor['donor_data'] = Donor_list::orderBy('donor_id','desc')->get();
+        return view('admin.donor.donor_list',$donor);
     }
 
     /**
@@ -24,7 +26,7 @@ class DonorListController extends Controller
      */
     public function create()
     {
-        //
+       return view('admin.donor.add_donor');
     }
 
     /**
@@ -35,7 +37,17 @@ class DonorListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Donor_list;
+        $alldata = $request->all();
+        $validation = Validator::make($alldata, $model->validation());
+        if($validation->fails()){
+            Toastr::warning('Validation Failed');
+             return back()->withErrors($validation)->withInput($alldata);
+        }
+        $model->fill($alldata)->save();
+        Toastr::success('Donor Add Successfully', 'Success');
+        return back();
+
     }
 
     /**
@@ -55,9 +67,10 @@ class DonorListController extends Controller
      * @param  \App\Donor_list  $donor_list
      * @return \Illuminate\Http\Response
      */
-    public function edit(Donor_list $donor_list)
+    public function edit($id)
     {
-        //
+        $donor['edit_donor'] = Donor_list::findOrFail($id);
+        return view('admin.donor.edit_donor',$donor);
     }
 
     /**
@@ -67,9 +80,18 @@ class DonorListController extends Controller
      * @param  \App\Donor_list  $donor_list
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Donor_list $donor_list)
+    public function update(Request $request, $id)
     {
-        //
+        $model = Donor_list::findOrFail($id);
+        $alldata = $request->all();
+        $validation = Validator::make($alldata, $model->validation());
+        if($validation->fails()){
+            Toastr::warning('Validation Failed');
+             return back()->withErrors($validation)->withInput($alldata);
+        }
+        $model->fill($alldata)->save();
+        Toastr::success('Donor Update Successfully', 'Success');
+        return back();
     }
 
     /**
@@ -78,8 +100,10 @@ class DonorListController extends Controller
      * @param  \App\Donor_list  $donor_list
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Donor_list $donor_list)
+    public function destroy(Request $request, $id)
     {
-        //
+      Donor_list::where('donor_id' , $id)->delete();
+      Toastr::success('Donor Delete Successfully', 'Success');
+      return back();
     }
 }
