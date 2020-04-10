@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('title') Edit Patient | HMS @endsection @section('content')
+@extends('layouts.app')
+@section('title') Edit Patient | HMS @endsection
+@section('content')
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">

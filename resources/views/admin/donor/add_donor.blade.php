@@ -1,5 +1,5 @@
-@extends('layouts.app') 
-@section('title') Add  Donor | HMS @endsection 
+@extends('layouts.app')
+@section('title') Donor | HMS @endsection 
 @section('content')
 <div class="right_col" role="main">
     <div class="">
@@ -95,7 +95,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3  label-align">Donor Email<span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6">
                                     <input class="form-control" name="donor_email" type="email" placeholder="Email" value="{{ old('donor_email') }}">
-                                
+
                                 </div>
                             </div>
 

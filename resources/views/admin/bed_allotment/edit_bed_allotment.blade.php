@@ -134,7 +134,7 @@
 
         $("#bed_allot_category_id").change(function() {
             var data = $(this).val();
-            
+
             $.ajax({
                 url     : "/get_bed_quantity/"+data,
                 success: function(data) {
