@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Medicine;
+use App\Medicine_categorie;
 use Illuminate\Http\Request;
-
+use Toastr;
 class MedicineController extends Controller
 {
     /**
@@ -14,17 +15,20 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        //
+      return view('admin.medicine.medicine');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function list()
+    {
+      $data['category'] = Medicine_categorie::get();
+      $data['medicine'] = Medicine::get();
+      return view('admin.medicine.medicine_list', $data);
+    }
+
     public function create()
     {
-        //
+      $data['category']=Medicine_categorie::get();
+      return view('admin.medicine.add_medicine',$data);
     }
 
     /**
@@ -35,41 +39,70 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'med_cat_id'=>'required',
+        'med_name'=>'required',
+        'med_purchase_price'=>'required',
+        'med_sales_price'=>'required',
+        'med_store_box'=>'required',
+        'med_quantity'=>'required',
+        'med_generic_name'=>'required',
+        'med_company'=>'required',
+        'med_expire_date'=>'required'
+      ]);
+
+         $input=[
+           'med_cat_id' => $request->med_cat_id,
+           'med_name' => $request->med_name,
+           'med_purchase_price' => $request->med_purchase_price,
+           'med_sales_price' => $request->med_sales_price,
+           'med_store_box' => $request->med_store_box,
+           'med_quantity' => $request->med_quantity,
+           'med_generic_name' => $request->med_generic_name,
+           'med_company'=> $request->med_company,
+           'med_expire_date'=> $request->med_expire_date,
+         ];
+      Medicine::create($input);
+      Toastr::success('Added Successfully', 'Success', ["positionClass" => "toast-bottom-right"]);
+      return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Medicine  $medicine
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Medicine $medicine)
+    public function edit($id)
     {
-        //
+      $data['category'] = Medicine_categorie::get();
+      $data['medicine']=Medicine::find($id);
+      return view('admin.medicine.edit_medicine',$data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Medicine  $medicine
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Medicine $medicine)
+    public function update(Request $request,$id)
     {
-        //
-    }
+      $request->validate([
+        'med_cat_id'=>'required',
+        'med_name'=>'required',
+        'med_purchase_price'=>'required',
+        'med_sales_price'=>'required',
+        'med_store_box'=>'required',
+        'med_quantity'=>'required',
+        'med_generic_name'=>'required',
+        'med_company'=>'required',
+        'med_expire_date'=>'required'
+      ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Medicine  $medicine
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Medicine $medicine)
-    {
-        //
+         $input=[
+           'med_cat_id' => $request->med_cat_id,
+           'med_name' => $request->med_name,
+           'med_purchase_price' => $request->med_purchase_price,
+           'med_sales_price' => $request->med_sales_price,
+           'med_store_box' => $request->med_store_box,
+           'med_quantity' => $request->med_quantity,
+           'med_generic_name' => $request->med_generic_name,
+           'med_company'=> $request->med_company,
+           'med_expire_date'=> $request->med_expire_date,
+         ];
+
+       Medicine::where('med_id',$id)->update($input);
+       Toastr::success('Updated Successfully', 'Success', ["positionClass" => "toast-bottom-right"]);
+       return back();
     }
 
     /**
@@ -78,8 +111,17 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Medicine $medicine)
+    public function destroy($id)
     {
-        //
+      Medicine::where('med_id',$id)->delete();
+      return response(['msgtype'=>"success",'message'=>"Successfully Data Deleted"]);
+    }
+
+    public function stock(Request $request)
+    {
+      $id = $request->id;
+      $input=['med_quantity' => $request->quantity,];
+      Medicine::where('med_id',$id)->update($input);
+      return response(['msgtype'=>"success",'message'=>"Successfully Medicine Stock Updated"]);
     }
 }

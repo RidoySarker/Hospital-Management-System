@@ -7,79 +7,59 @@ use Illuminate\Http\Request;
 
 class MedicineCategorieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+      return view('admin.medicine.medicine_category');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+      $data['category'] = Medicine_categorie::get();
+      return view('admin.medicine.medicine_category_list', $data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+          'category_name'    => 'required',
+          'category_details' => 'required',
+      ]);
+      $data = [
+          'med_cat_name'    => $request->category_name,
+          'med_cat_details' => $request->category_details,
+      ];
+      $id = $request->category_id;
+      if($id) {
+          Medicine_categorie::where('med_cat_id', $id)->update($data);
+          $response = [
+              'msgtype' => 'success',
+              'message' => 'Data Updated Successfully',
+          ];
+          echo json_encode($response);
+      } else {
+          Medicine_categorie::create($data);
+          $response = [
+              'msgtype' => 'success',
+              'message' => 'Data Inserted Successfully',
+          ];
+          echo json_encode($response);
+      }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Medicine_categorie  $medicine_categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Medicine_categorie $medicine_categorie)
+    public function edit($id)
     {
-        //
+      $data = Medicine_categorie::find($id);
+      echo json_encode($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Medicine_categorie  $medicine_categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Medicine_categorie $medicine_categorie)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Medicine_categorie  $medicine_categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Medicine_categorie $medicine_categorie)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Medicine_categorie  $medicine_categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Medicine_categorie $medicine_categorie)
-    {
-        //
+      Medicine_categorie::where('med_cat_id', $id)->delete();
+      $response = [
+          'msgtype' => 'success',
+          'message' => 'Data Deleted Successfully',
+      ];
+      echo json_encode($response);
     }
 }

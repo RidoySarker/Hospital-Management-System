@@ -36,6 +36,11 @@ Route::get('get_patient_name/{patient_id}', 'BedAllotmentController@get_patient_
 Route::get('get_bed_quantity/{quantity_id}', 'BedAllotmentController@get_bed_quantity');
 Route::get('list/{quantity_id}', 'BedAllotmentController@list');
 
+Route::resource('medicine_category','MedicineCategorieController');
+Route::resource('medicine','MedicineController');
+Route::get('medicines', 'MedicineController@list')->name('medicine.list');
+Route::post('medicine/{id}/update', 'MedicineController@update')->name('medicine.update');
+Route::post('medicine/stock', 'MedicineController@stock')->name('medicine.stock');
+
 Route::resource('donor', 'DonorListController');
 Route::resource('bloodbank', 'BloodBankController');
-

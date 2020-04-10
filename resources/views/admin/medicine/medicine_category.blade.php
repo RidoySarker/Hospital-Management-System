@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title') Employee Role | HMS @endsection
+@section('title') Medicine Category | HMS @endsection
 @section('content')
 
 <div class="right_col" role="main">
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Employee Role</h3>
+        <h3>Medicine Category</h3>
       </div>
 
       <div class="title_right">
@@ -22,8 +22,8 @@
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Role list</h2>
-        
+            <h2>Category list</h2>
+
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
@@ -48,19 +48,19 @@
     <form id="modal-form">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Add New</h4>
+          <h4 class="modal-title">Add Medicine Category</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
           @csrf
           <div class="form-group">
-            <label>Role Name</label>
-            <input type="text" class="form-control" placeholder="Enter Role Name" id="role_name" name="role_name">
+            <label>Category Name</label>
+            <input type="text" class="form-control" placeholder="Enter Medicine Category Name" id="category_name" name="category_name">
           </div>
           <div class="form-group">
-            <label>Role Details</label>
-            <input type="text" class="form-control" placeholder="Enter Role Details" id="role_details" name="role_details">
+            <label>Details</label>
+            <textarea class="form-control" placeholder="Enter Category Details" id="category_details" name="category_details"></textarea>
           </div>
         </div>
         <div class="modal-footer">
@@ -77,19 +77,19 @@
     <form id="modal_form">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Role</h4>
+          <h4 class="modal-title">Edit Medicine Category</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label>Role Name</label>
-            <input type="text" class="form-control" id="e_role_name" name="role_name">
+            <label>Category Name</label>
+            <input type="text" class="form-control" id="e_category_name" name="category_name">
           </div>
           <div class="form-group">
             <label>Role Details</label>
-            <input type="text" class="form-control" id="e_role_details" name="role_details">
+            <textarea class="form-control" id="e_category_details" name="category_details"></textarea>
           </div>
-          <input type="hidden" id="e_role_id">
+          <input type="hidden" id="e_category_id">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -103,17 +103,18 @@
 @section('script')
 <script type="text/javascript">
   $(document).ready(function() {
+    loaddata();
     $(document).on("click", ".submit", function(e) {
       e.preventDefault();
-      var role_name = $("#role_name").val();
-      var role_details = $("#role_details").val();
+      var category_name = $("#category_name").val();
+      var category_details = $("#category_details").val();
 
       $.ajax({
-        url: "{{route('employee_role.store')}}",
+        url: "{{route('medicine_category.store')}}",
         data: {
           "_token": "{{ csrf_token() }}",
-          role_name: role_name,
-          role_details: role_details
+          category_name: category_name,
+          category_details: category_details
         },
         type: "post",
         dataType: "json",
@@ -139,29 +140,29 @@
       var data = $(this).attr("data");
 
       $.ajax({
-        url: "{{url('employee_role')}}" + "/" + data + "/edit",
+        url: "{{url('medicine_category')}}"+'/'+ data + "/edit",
         type: "get",
         dataType: "json",
         success: function(data) {
-          $("#e_role_name").val(data.role_name);
-          $("#e_role_details").val(data.role_details);
-          $("#e_role_id").val(data.role_id);
+          $("#e_category_name").val(data.med_cat_name);
+          $("#e_category_details").val(data.med_cat_details);
+          $("#e_category_id").val(data.med_cat_id);
         }
       });
     });
     $(document).on("click", ".update", function(e) {
       e.preventDefault();
-      var role_id = $("#e_role_id").val();
-      var role_name = $("#e_role_name").val();
-      var role_details = $("#e_role_details").val();
+      var category_id = $("#e_category_id").val();
+      var category_name = $("#e_category_name").val();
+      var category_details = $("#e_category_details").val();
 
       $.ajax({
-        url: "{{route('employee_role.store')}}",
+        url: "{{route('medicine_category.store')}}",
         data: {
           "_token": "{{ csrf_token() }}",
-          role_id: role_id,
-          role_name: role_name,
-          role_details: role_details
+          category_id: category_id,
+          category_name: category_name,
+          category_details: category_details
         },
         type: "post",
         dataType: "json",
@@ -194,7 +195,7 @@
           .then((willDelete) => {
             if (willDelete) {
       $.ajax({
-        url: "{{url('employee_role')}}" + "/" + data,
+        url: "{{url('medicine_category')}}" + "/" + data,
         data: {
           _token: "{{ csrf_token() }}"
         },
@@ -212,15 +213,15 @@
     } else {
       swal("Your Data is safe!");
     }
-  });
     });
-    loaddata();
+    });
+
   });
 
   function loaddata() {
 
     $.ajax({
-      url: "{{route('employee_role.create')}}",
+      url: "{{route('medicine_category.create')}}",
       type: "get",
       dataType: "html",
       success: function(data) {

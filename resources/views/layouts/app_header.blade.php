@@ -17,12 +17,7 @@
                         <span>Settings</span>
                       </a>
                   <a class="dropdown-item"  href="javascript:;">Help</a>
-                                    <div class="pull-right">
-                  <form method="post" action="{{route('logout')}}"> 
-                    @csrf
-                    <button class="btn btn-default btn-flat">Sign out</button>
-                  </form>
-                </div>
+                                
                   </div>
                 </li>
 

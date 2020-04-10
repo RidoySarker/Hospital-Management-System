@@ -1,4 +1,6 @@
-@extends('layouts.app') @section('title') Donor | HMS @endsection @section('content')
+@extends('layouts.app')
+@section('title') Donor | HMS @endsection
+@section('content')
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
@@ -22,19 +24,7 @@
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Donor list</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Settings 1</a>
-                                    <a class="dropdown-item" href="#">Settings 2</a>
-                                </div>
-                            </li>
-                            <li><a class="close-link"><i class="fa fa-close"></i></a>
-                            </li>
-                        </ul>
+                        <
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -73,7 +63,7 @@
 
                                                         <a href="{{route('donor.edit',$value->donor_id)}}">
                                                         <button class="btn btn-btn btn-outline-info btn-sm"><i class="fa fa-edit"></i></button>
-                                                        </a> 
+                                                        </a>
                                                         <form method="POST" action="{{route('donor.destroy',$value->donor_id)}}">
                                                     @csrf @method("DELETE")
                                                     <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-outline-danger btn-sm pull-right" style="margin-top: -36px;"><i class="fa fa-trash"></i></button>
