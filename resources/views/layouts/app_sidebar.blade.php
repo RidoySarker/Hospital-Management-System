@@ -87,8 +87,8 @@
 
                   <li><a><i class="fas fa-notes-medical"></i> Prescription <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="{{route('prescription.create')}}">Add Prescription</a></li>
+                      <li><a href="{{route('prescription.index')}}">Prescription List</a></li>
                     </ul>
                   </li>
 

@@ -17,7 +17,10 @@ class CreatePrescriptionMedicinesTable extends Migration
             $table->bigIncrements('prescription_m_id');
             $table->unsignedBigInteger('prescription_id');
             $table->unsignedBigInteger('prescription_medicine_id');
-            $table->string('prescription_medicine_time', 45);
+            $table->string('prescription_med_dosage', 45);
+            $table->string('prescription_med_frequency', 45);
+            $table->string('prescription_med_days', 45);
+            $table->string('prescription_med_ins', 45);
             $table->timestamps();
             $table->foreign('prescription_id')
                 ->references('prescription_id')->on('prescriptions')

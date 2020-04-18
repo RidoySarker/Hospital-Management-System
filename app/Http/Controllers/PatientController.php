@@ -18,7 +18,7 @@ class PatientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $patient['p_data'] = Patient::get();
         return view('admin.patient.patient_list',$patient);
     }
@@ -30,7 +30,7 @@ class PatientController extends Controller
      */
     public function create()
     {
-        
+
         $doctor['d_data'] = Doctor::orderBy('doc_id', 'desc')->get();
         return view('admin.patient.add_patient',$doctor);
     }
@@ -43,7 +43,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        $id = IdGenerator::generate(['table' => 'patients', 'length' => 8, 'prefix' =>'PAT']);
+        $id = IdGenerator::generate(['table' => 'patients','field'=>'p_s','length' => 8, 'prefix' =>'PAT']);
         $request->validate([
             'p_name' => 'required',
             'p_age' => 'required',
@@ -110,7 +110,7 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        
+
          $doctor['d_data'] = Doctor::orderBy('doc_id', 'desc')->get();
         return view('admin.patient.edit_patient',$doctor,compact('patient'));
     }
