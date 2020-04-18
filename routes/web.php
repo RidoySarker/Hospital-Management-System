@@ -42,5 +42,11 @@ Route::get('medicines', 'MedicineController@list')->name('medicine.list');
 Route::post('medicine/{id}/update', 'MedicineController@update')->name('medicine.update');
 Route::post('medicine/stock', 'MedicineController@stock')->name('medicine.stock');
 
+Route::resource('prescription','PrescriptionController');
+Route::get('prescriptions','PrescriptionController@list')->name('prescription.list');
+Route::get('prescription/show','PrescriptionController@show')->name('prescription.show');
+Route::post('prescription/{id}/update','PrescriptionController@update')->name('prescription.update');
+
+
 Route::resource('donor', 'DonorListController');
 Route::resource('bloodbank', 'BloodBankController');
