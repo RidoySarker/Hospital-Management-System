@@ -67,6 +67,11 @@ class MedicineController extends Controller
       return back();
     }
 
+    public function show(Medicine $medicine)
+    {
+
+    }
+
     public function edit($id)
     {
       $data['category'] = Medicine_categorie::get();
@@ -117,10 +122,18 @@ class MedicineController extends Controller
       return response(['msgtype'=>"success",'message'=>"Successfully Data Deleted"]);
     }
 
+    public function quantity()
+    {
+      return view('admin.medicine.stock');
+    }
+
     public function stock(Request $request)
     {
       $id = $request->id;
-      $input=['med_quantity' => $request->quantity,];
+      $old_quantity=Medicine::find($id);
+      $quantity=$request->new_quantity;
+      $total=($old_quantity->med_quantity)+$quantity;
+      $input=['med_quantity' => $total];
       Medicine::where('med_id',$id)->update($input);
       return response(['msgtype'=>"success",'message'=>"Successfully Medicine Stock Updated"]);
     }

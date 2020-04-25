@@ -53,18 +53,11 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="body">
 
-        <form class="stock-form" method="post">
-        <div class="field item form-group">
-          <label class="col-form-label col-md-3 col-sm-3  label-align">Quantity</label>
-          <div class="col-md-6 col-sm-6">
-            <input class="form-control" name="new_quantity" id="new_quantity" required="required" min=0 type="number"/></div>
-        </div>
-
-      </form>
       </div>
       <div class="modal-footer">
+        <input type="hidden" id='id'>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="update btn btn-primary">Update</button>
       </div>
@@ -79,31 +72,43 @@
   $(document).ready(function() {
 
     $(document).on("click",".stock",function(){
-      var quantity = parseInt($(this).attr("quantity"));
       var id = $(this).attr("get_id");
-
-      $(document).on("click",".update",function(){
-        var new_quantity=parseInt($("#new_quantity").val());
-        var total=quantity+new_quantity;
-
-        $.ajax({
-            url:"{{route('medicine.stock')}}",
-            data:{quantity:total,id:id,_token: "{{ csrf_token() }}"},
-            type:"post",
-            success:function(data)
-            {
-              if (data.msgtype == "success") {
-                toastr["success"](data.message);
-                loaddata();
-                $('.stock-form').trigger("reset");
-                  $("#stock").modal('hide');
-              } else {
-                toastr["error"](data.message);
-              }
-            }
-        });
-
+      $("#id").val(id);
+      $.ajax({
+        url:"{{route('medicine.quantity')}}",
+        type:'post',
+        data: {
+          _token: "{{ csrf_token() }}"
+        },
+        dataType:'html',
+        success:function(data)
+        {
+          $("#body").html(data);
+        }
       });
+      $("#stock").modal();
+    });
+
+    $(document).on("click",".update",function(){
+      var new_quantity=parseInt($("#new_quantity").val());
+      var id=$("#id").val();
+      $.ajax({
+        url:"{{route('medicine.stock')}}",
+        data:{new_quantity:new_quantity, id:id, _token:"{{ csrf_token() }}"},
+        type:"post",
+        success:function(data)
+        {
+          if (data.msgtype == "success") {
+            toastr["success"](data.message);
+            loaddata();
+            $('.stock-form').trigger("reset");
+            $("#stock").modal('hide');
+          } else {
+            toastr["error"](data.message);
+          }
+        }
+      });
+
     });
 
     loaddata();

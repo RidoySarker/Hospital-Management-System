@@ -106,26 +106,26 @@
           });
 
     });
-  $(document).on('click','.show', function(){
-    var id=$(this).attr("data");
 
-    $.ajax({
-        url:"{{route('prescription.show')}}",
-        type:'get',
-        data:{id:id},
-        success:function(data)
-        {
-          $("#invoice_body").html(data);
-        }
-    });
+});
+$('#datalist').on('click','.show',function(){
+  var id=$(this).attr("data");
 
+  $.ajax({
+    url:"{{route('prescription.show')}}",
+    type:'get',
+    data:{id:id},
+    success:function(data)
+    {
+      $("#invoice_body").html(data);
+    }
   });
 
-  $(document).on('click','#print_btn',function(){
-    printDiv('invoice_body');
-  });
 });
 
+$('#invoice').on('click','#print_btn',function(){
+  printDiv('invoice_body');
+});
 
   function loaddata() {
     $.ajax({
