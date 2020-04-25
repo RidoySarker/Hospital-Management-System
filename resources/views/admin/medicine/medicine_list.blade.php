@@ -26,9 +26,9 @@
             <td>{{ $value->med_sales_price }}</td>
             <td>{{ $value->med_quantity }}
               @if($value->med_quantity<=10)
-                <button class="btn btn-sm btn-danger stock" data-toggle="modal" quantity="{{$value->med_quantity}}" get_id="{{$value->med_id}}" data-target="#stock">Stcok</button>
+                <button class="btn btn-sm btn-danger stock" get_id="{{$value->med_id}}">Stock</button>
               @else
-                <button class="btn btn-sm btn-info stock" data-toggle="modal" data-target="#stock" quantity="{{$value->med_quantity}}" get_id="{{$value->med_id}}">Load</button> @endif</td>
+                <button class="btn btn-sm btn-info stock" get_id="{{$value->med_id}}">Load</button> @endif</td>
             <td>{{ $value->med_expire_date }}</td>
             <td>
                 <a href="{{route('medicine.edit',$value->med_id)}}" class="edit btn btn-btn btn-outline-info btn-sm"><i class="fa fa-edit"></i></a>
