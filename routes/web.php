@@ -48,6 +48,10 @@ Route::get('prescriptions','PrescriptionController@list')->name('prescription.li
 Route::get('prescription/show','PrescriptionController@show')->name('prescription.show');
 Route::post('prescription/{id}/update','PrescriptionController@update')->name('prescription.update');
 
-
 Route::resource('donor', 'DonorListController');
 Route::resource('bloodbank', 'BloodBankController');
+
+Route::resource('expense_category', 'ExpenseCategorieController');
+Route::resource('expense', 'ExpenseController');
+Route::get('expenses', 'ExpenseController@list')->name('expense.list');
+Route::post('expense/{id}/update','ExpenseController@update')->name('expense.update');

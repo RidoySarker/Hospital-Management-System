@@ -15,8 +15,8 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->bigIncrements('exp_id');
+            $table->string('exp_date',45);
             $table->unsignedBigInteger('exp_cat_id');
-            $table->string('exp_pay_to', 110);
             $table->integer('exp_amount');
             $table->string('exp_details', 110);
             $table->timestamps();

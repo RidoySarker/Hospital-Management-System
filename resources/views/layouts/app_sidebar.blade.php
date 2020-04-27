@@ -72,8 +72,9 @@
 
                   <li><a><i class="fas fa-dollar-sign"></i> Financial Activities <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Add Department</a></li>
-                      <li><a href="form_advanced.html">Department List</a></li>
+                      <li><a href="/expense_category">Expense Category</a></li>
+                      <li><a href="/expense/create">Add Expense</a></li>
+                      <li><a href="/expense">Expense List</a></li>
                     </ul>
                   </li>
 
