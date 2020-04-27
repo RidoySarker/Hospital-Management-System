@@ -3,83 +3,77 @@
 namespace App\Http\Controllers;
 
 use App\Expense;
+use App\Expense_Categorie;
 use Illuminate\Http\Request;
-
+use Toastr;
 class ExpenseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+      return view('admin.financial_activities.expense.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function list()
+    {
+      $data['expense'] = Expense::get();
+      $data['category'] = Expense_Categorie::get();
+      return view('admin.financial_activities.expense.list', $data);
+    }
+
     public function create()
     {
-        //
+      $data['category']=Expense_Categorie::get();
+      return view('admin.financial_activities.expense.add_expense',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'exp_cat_id'=>'required',
+        'exp_amount'=>'required',
+        'exp_details'=>'required']
+      );
+     $input=[
+       'exp_cat_id' => $request->exp_cat_id,
+       'exp_amount' => $request->exp_amount,
+       'exp_details' => $request->exp_details,
+       'exp_date' => date('Y-m-d'),
+     ];
+
+      Expense::create($input);
+      Toastr::success('Added Successfully', 'Success', ["positionClass" => "toast-bottom-right"]);
+      return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Expense $expense)
+    public function edit($id)
     {
-        //
+      $data['category'] = Expense_Categorie::get();
+      $data['expense']=Expense::find($id);
+      return view('admin.financial_activities.expense.edit_expense',$data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Expense $expense)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'exp_cat_id'=>'required',
+        'exp_amount'=>'required',
+        'exp_details'=>'required']
+      );
+      $input=[
+        'exp_cat_id' => $request->exp_cat_id,
+        'exp_amount' => $request->exp_amount,
+        'exp_details' => $request->exp_details,
+      ];
+
+       Expense::where('exp_id',$id)->update($input);
+       Toastr::success('Updated Successfully', 'Success', ["positionClass" => "toast-bottom-right"]);
+       return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Expense $expense)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Expense  $expense
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Expense $expense)
-    {
-        //
+        Expense::where('exp_id',$id)->delete();
+        return response(['msgtype'=>"success",'message'=>"Successfully Data Deleted"]);
     }
 }

@@ -7,79 +7,59 @@ use Illuminate\Http\Request;
 
 class ExpenseCategorieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+       return view('admin.financial_activities.expense.category.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $data['category'] = Expense_Categorie::get();
+        return view('admin.financial_activities.expense.category.list',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+          'exp_cat_name'    => 'required',
+          'exp_cat_description' => 'required',
+      ]);
+      $data = [
+          'exp_cat_name'    => $request->exp_cat_name,
+          'exp_cat_description' => $request->exp_cat_description,
+      ];
+      $id = $request->exp_cat_id;
+      if($id) {
+          Expense_Categorie::where('exp_cat_id', $id)->update($data);
+          $response = [
+              'msgtype' => 'success',
+              'message' => 'Data Updated Successfully',
+          ];
+          echo json_encode($response);
+      } else {
+          Expense_Categorie::create($data);
+          $response = [
+              'msgtype' => 'success',
+              'message' => 'Data Inserted Successfully',
+          ];
+          echo json_encode($response);
+      }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Expense_Categorie  $expense_Categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Expense_Categorie $expense_Categorie)
+    public function edit($id)
     {
-        //
+      $data = Expense_Categorie::find($id);
+      echo json_encode($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Expense_Categorie  $expense_Categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Expense_Categorie $expense_Categorie)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Expense_Categorie  $expense_Categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Expense_Categorie $expense_Categorie)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Expense_Categorie  $expense_Categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Expense_Categorie $expense_Categorie)
-    {
-        //
+      Expense_Categorie::where('exp_cat_id', $id)->delete();
+      $response = [
+          'msgtype' => 'success',
+          'message' => 'Data Deleted Successfully',
+      ];
+      echo json_encode($response);
     }
 }
