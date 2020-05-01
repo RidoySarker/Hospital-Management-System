@@ -41,7 +41,7 @@
 
                   <li><a><i class="fas fa-edit"></i> Patient <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{url('patient/create')}}">Add Patient</a></li>
+                      <li><a href="{{url('out_patient')}}">Out Patient</a></li>
                       <li><a href="{{url('patient')}}">Patient List</a></li>
                     </ul>
                   </li>

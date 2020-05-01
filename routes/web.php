@@ -20,6 +20,9 @@ Route::get('/admin', 'HomeController@index');
 Route::resource('department', 'DepartmentController');
 
 Route::resource('doctor', 'DoctorController');
+//Out Patient
+Route::resource('out_patient', 'OutPatientController');
+Route::get('/out_patient.datalist', 'OutPatientController@datalist');
 
 Route::resource('patient', 'PatientController');
 

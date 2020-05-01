@@ -49,12 +49,25 @@
                                 </div>
                             </div>
 
-                            <div class="field item form-group">
-                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="app_d_id">Doctor ID <span class="required">*</span>
+                            <div class="field item form-group" style="display: none;">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="p_name">Patient Name <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input id="app_d_id" class="form-control" name="app_d_id" placeholder="Enter Patient ID" type="text" value="{{ old('app_d_id') }}">
-                                    <p class="text-danger">{{$errors->first('app_d_id')}}</p>
+                                    <input id="p_name" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="field item form-group">
+                                <label class="col-form-label col-md-3 col-sm-3 label-align" for="app_doc_id">Doctor Name <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select id="app_doc_id" class="form-control" name="app_doc_id">
+                                        <option hidden>--Select One--</option>
+                                        @foreach($doctor as $value)
+                                        <option>{{$value->doc_name}}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="text-danger">{{$errors->first('app_doc_id')}}</p>
                                 </div>
                             </div>
 
@@ -62,7 +75,7 @@
                                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="app_date">Appointment Date <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6">
-                                    <input type="date" id="app_date" name="app_date" class="form-control" value="{{ old('app_date') }}">
+                                    <input id="app_date" name="app_date" class="form-control" placeholder="yyyy-mm-dd" value="{{ old('app_date') }}">
                                     <p class="text-danger">{{$errors->first('app_date')}}</p>
                                 </div>
                             </div>
@@ -105,7 +118,13 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        
+        $("#app_date").datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: false,
+            minDate: 0,
+         });
     });
 </script>
 @endsection
