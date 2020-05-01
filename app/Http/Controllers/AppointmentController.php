@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Appointment;
 use Illuminate\Http\Request;
+use App\Appointment;
+use App\Doctor;
+use App\Patient;
+use Validator;
+use Toastr;
 
 class AppointmentController extends Controller
 {
@@ -24,7 +28,8 @@ class AppointmentController extends Controller
      */
     public function create()
     {
-        return view('admin.appointment.add_appointment');
+        $doctor = Doctor::all();
+        return view('admin.appointment.add_appointment', ['doctor' => $doctor]);
     }
 
     /**
@@ -35,7 +40,12 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Appointment;
+        $validation = Validator::make($request->all(), $model->validation(), $model->message());
+        if($validation->fails()) {
+            Toastr::warning('Validation Failed', '', ["positionClass" => "toast-top-right"]);
+            return back()->withErrors($validation)->withInput($request->all());
+        }
     }
 
     /**
