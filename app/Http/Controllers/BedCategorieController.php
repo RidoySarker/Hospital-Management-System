@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Bed_categorie;
+use App\BedCategory;
+use App\Floor;
 use Illuminate\Http\Request;
 use Validator;
 use Toastr;
@@ -16,8 +17,14 @@ class BedCategorieController extends Controller
      */
     public function index()
     {
-        $data['bed_category'] = Bed_categorie::orderBy('bed_category_id', 'desc')->get();
-        return view('admin.bed_category.bed_category_list', $data);
+        $floor_data= Floor::get();
+        return view('admin.bed.bed_category.bed_category', ['floor_data' => $floor_data]);
+    }
+
+    public function list()
+    {
+        $BedCategory = BedCategory::get();
+        return response()->json($BedCategory);
     }
 
     /**
@@ -27,7 +34,7 @@ class BedCategorieController extends Controller
      */
     public function create()
     {
-        return view('admin.bed_category.add_bed_category');
+        //
     }
 
     /**
@@ -38,18 +45,26 @@ class BedCategorieController extends Controller
      */
     public function store(Request $request)
     {
-        $model = new Bed_categorie;
-        $all_data = $request->all();
-        $validate = Validator::make($all_data, $model->validation());
-        if($validate->fails()) {
-            Toastr::warning('Validation Failed', '', ["positionClass" => "toast-top-right"]);
-            
-            return back()->withErrors($validate)->withInput($all_data);
+        $category = New BedCategory;
+        $validation = Validator::make($request->all(), $category->validation());
+        if($validation->fails())
+        {
+            $status=400;
+            $response = [
+                "status" => $status,
+                "errors" => $validation->errors(),
+            ];
         }
-        $model->fill($all_data)->save();
-        Toastr::success('Added Successfully', '', ["positionClass" => "toast-top-right"]);
-        return back();
-
+        else
+        {
+           $category->fill($request->all())->save();
+            $status=200;
+            $response = [
+                "status" => $status,
+                "data" => $category,
+            ];
+        }
+        return response()->json($response, $status);
     }
 
     /**
@@ -71,8 +86,8 @@ class BedCategorieController extends Controller
      */
     public function edit($id)
     {
-        $data['bed_category'] = Bed_categorie::findOrFail($id);
-        return view('admin.bed_category.edit_bed_category', $data);
+        $data = BedCategory::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -82,19 +97,29 @@ class BedCategorieController extends Controller
      * @param  \App\Bed_categorie  $bed_categorie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $model = Bed_categorie::findOrFail($id);
-        $all_data = $request->all();
-        $validate = Validator::make($all_data, $model->validation());
-        if($validate->fails()) {
-            Toastr::warning('Validation Failed', '', ["positionClass" => "toast-top-right"]);
-            
-            return back()->withErrors($validate)->withInput($all_data);
+        $id = $request->category_id;
+        $category =BedCategory::findOrFail($id);
+        $validation = Validator::make($request->all(), $category->validation());
+        if($validation->fails())
+        {
+            $status=400;
+            $response = [
+                "status" => $status,
+                "errors" => $validation->errors(),
+            ];
         }
-        $model->fill($all_data)->save();
-        Toastr::success('Updated Successfully', '', ["positionClass" => "toast-top-right"]);
-        return back();
+        else
+        {
+           $category->fill($request->all())->update();
+            $status=200;
+            $response = [
+                "status" => $status,
+                "data" => $category,
+            ];
+        }
+        return response()->json($response, $status);
     }
 
     /**
@@ -105,8 +130,11 @@ class BedCategorieController extends Controller
      */
     public function destroy($id)
     {
-        Bed_categorie::where('bed_category_id', $id)->delete();
-        Toastr::success('Deleted Successfully', '', ["positionClass" => "toast-top-right"]);
-        return back();
+        BedCategory::where('category_id', $id)->delete();
+        $status = 200;
+        $response = [
+            "status" => $status,
+        ];
+        return response()->json($response);
     }
 }

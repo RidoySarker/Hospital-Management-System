@@ -33,6 +33,8 @@ Route::resource('employee_role', 'EmployeeRoleController');
 Route::resource('schedule', 'ScheduleController');
 Route::resource('appointment', 'AppointmentController');
 Route::resource('bed_category', 'BedCategorieController');
+Route::get('bed_category.list', 'BedCategorieController@list');
+Route::post('bed_category/update', 'BedCategorieController@update');
 Route::resource('bed', 'BedController');
 Route::resource('floor', 'FloorController');
 Route::get('floor.list', 'FloorController@list');

@@ -14,9 +14,13 @@ class CreateBedCategoriesTable extends Migration
     public function up()
     {
         Schema::create('bed_categories', function (Blueprint $table) {
-            $table->bigIncrements('bed_category_id');
-            $table->string('bed_category_name', 110);
-            $table->string('bed_category_details', 110);
+            $table->bigIncrements('category_id');
+            $table->string('category_name', 110);
+            $table->string('category_details', 110);
+            $table->unsignedBigInteger('category_floor_id');
+            $table->foreign('category_floor_id')
+                ->references('floor_id')->on('floors')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

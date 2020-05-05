@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Floor List | HMS @endsection
+@section('title') Bed Category | HMS @endsection
 @section('content')
 <div class="right_col" role="main">
 	<div class="">
@@ -10,7 +10,7 @@
 			<div class="col-md-12 col-sm-12 ">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Floor List</h2>
+						<h2>Bed Category List</h2>
 						<button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">Add New</button>
 						<div class="clearfix"></div>
 					</div>
@@ -23,11 +23,12 @@
 											<tr>
 												<th>Sl</th>
 												<th>Name</th>
+												<th>Floor</th>
 												<th>Description</th>
 												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody id="floor_data">
+										<tbody id="category_data">
 										</tbody>
 									</table>
 								</div>
@@ -52,13 +53,23 @@
         <div class="modal-body">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" id="floor_name" name="floor_name">
-            <span id="floor_name_error"></span>
+            <input type="text" class="form-control" id="category_name" name="category_name">
+            <span id="category_name_error"></span>
+          </div>
+          <div class="form-group">
+            <label>Floor</label>
+				<select name="category_floor_id" id="category_floor_id" class="form-control">
+					<option hidden="">Select Floor</option>
+					@foreach($floor_data as $value)
+				     <option value="{{$value->floor_id}}">{{$value->floor_name}}</option>
+				     @endforeach
+				</select>
+            <span id="category_floor_id_error"></span>
           </div>
           <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control" id="floor_description" name="floor_description"></textarea>
-            <span id="floor_description_error"></span>
+            <textarea class="form-control" id="category_details" name="category_details"></textarea>
+            <span id="category_details_error"></span>
 	          </div>
         </div>
         <div class="modal-footer">
@@ -76,21 +87,31 @@
     <form id="edit_form">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Floor</h4>
+          <h4 class="modal-title">Edit Bed Category</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" id="e_floor_name" name="floor_name">
-            <span id="floor_name_edit"></span>
+            <input type="text" class="form-control" id="e_category_name" name="category_name">
+            <span id="category_name_edit"></span>
           </div>
-          <input type="hidden" id="e_floor_id">
+          <input type="hidden" id="e_category_id">
+          <div class="form-group">
+            <label>Floor</label>
+				<select name="category_floor_id" id="e_category_floor_id" class="form-control">
+					<option hidden="">Select Floor</option>
+					@foreach($floor_data as $value)
+				     <option value="{{$value->floor_id}}">{{$value->floor_name}}</option>
+				     @endforeach
+				</select>
+            <span id="category_floor_id_edit"></span>
+          </div>
           <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control" id="e_floor_description" name="floor_description"></textarea>
-            <span id="floor_description_edit"></span>
+            <textarea class="form-control" id="e_category_details" name="category_details"></textarea>
+            <span id="category_details_edit"></span>
 	          </div>
         </div>
         <div class="modal-footer">
@@ -111,12 +132,12 @@
 			var data = $(this).serializeArray();
 
 			$.ajax({
-				url: "{{route('floor.store')}}",
+				url: "{{route('bed_category.store')}}",
 				data: data,
 				type: "post",
 				dataType: "json",
 				success: function(data) {
-					toastr["success"]("Floor Added Succesfully");
+					toastr["success"]("Bed Category Added Succesfully");
 					$("#myModal").modal("hide");
 					$("#modal-form").trigger("reset");
 					dataList();
@@ -143,12 +164,12 @@
 				.then((willDelete) => {
 					if (willDelete) {
 						$.ajax({
-							url: "/floor/" + data,
+							url: "/bed_category/" + data,
 							type: "delete",
 							dataType: "json",
 							success: function(data) {
 								if (data.status == 200) {
-									toastr["success"]("Floor deleted Succesfully");
+									toastr["success"]("Bed Category deleted Succesfully");
 									dataList();
 								} else {
 									toastr["error"]("Something Went Wrong");
@@ -167,34 +188,37 @@
       var data = $(this).attr("data");
 
       $.ajax({
-      	url: "/floor/" + data + "/edit",
+      	url: "/bed_category/" + data + "/edit",
         type: "get",
         dataType: "json",
         success: function(data) {
-          $("#e_floor_name").val(data.floor_name);
-          $("#e_floor_description").val(data.floor_description);
-          $("#e_floor_id").val(data.floor_id);
+          $("#e_category_name").val(data.category_name);
+          $("#e_category_floor_id").val(data.category_floor_id);
+          $("#e_category_details").val(data.category_details);
+          $("#e_category_id").val(data.category_id);
         }
       });
     });
 
 		$(document).on("submit", "#edit_form", function(e) {
 			e.preventDefault();
-		      var floor_id = $("#e_floor_id").val();
-		      var floor_name = $("#e_floor_name").val();
-		      var floor_description = $("#e_floor_description").val();
+		      var category_id = $("#e_category_id").val();
+		      var category_name = $("#e_category_name").val();
+		      var category_floor_id = $("#e_category_floor_id").val();
+		      var category_details = $("#e_category_details").val();
 
 			$.ajax({
-				url: "floor/update",
+				url: "bed_category/update",
 				data: {
-					floor_id:floor_id,
-					floor_name:floor_name,
-					floor_description:floor_description
+					category_id:category_id,
+					category_name:category_name,
+					category_floor_id:category_floor_id,
+					category_details:category_details,
 				},
 				type: "post",
 				dataType: "json",
 				success: function(data) {
-					toastr["success"]("Floor Update Succesfully");
+					toastr["success"]("Bed Category Update Succesfully");
 					$("#editModal").modal("hide");
 					$("#adit_form").trigger("reset");
 					dataList();
@@ -212,7 +236,7 @@
 
 	function dataList() {
 		$.ajax({
-			url: "/floor.list",
+			url: "/bed_category.list",
 			type: "get",
 			dataType: "html",
 			success: function(data) {
@@ -223,13 +247,14 @@
 					b = b.add(
 						"<tr>" +
 						"<td>" + (a++) + "</td>" +
-						"<td>" + item.floor_name + "</td>" +
-						"<td>" + item.floor_description + "</td>" +
-						"<td><button class='edit view btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#editModal' data='" + item.floor_id + "'><i class='fa fa-edit'></i></button><button class='delete btn btn-outline-danger btn-sm' data='" + item.floor_id + "'><i class='fa fa-trash'></i></button></td>" +
+						"<td>" + item.category_name + "</td>" +
+						"<td>" + item.category_floor_id + "</td>" +
+						"<td>" + item.category_details + "</td>" +
+						"<td><button class='edit view btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#editModal' data='" + item.category_id + "'><i class='fa fa-edit'></i></button><button class='delete btn btn-outline-danger btn-sm' data='" + item.category_id + "'><i class='fa fa-trash'></i></button></td>" +
 						"</tr>"
 					)
 				});
-				$("#floor_data").html(b);
+				$("#category_data").html(b);
 				$("#example").dataTable();
 			}
 		});

@@ -27,7 +27,7 @@ class FloorController extends Controller
         //
     }
 
-        public function list()
+    public function list()
     {
         $floor = Floor::get();
         return response()->json($floor);

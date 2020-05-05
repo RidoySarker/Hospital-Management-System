@@ -115,8 +115,7 @@
                       <li><a href="{{ url('bed_category') }}">Bed Category List</a></li>
                       <li><a href="{{ route('bed.create') }}">Add Bed</a></li>
                       <li><a href="{{ url('bed') }}">Bed List</a></li>
-                      <li><a href="{{ route('bed_allotment.create') }}">Add Bed Allotment</a></li>
-                      <li><a href="{{ url('bed_allotment') }}">Bed Allotment List</a></li>
+                      <li><a href="{{ url('floor') }}">Bed Floor</a></li>
                     </ul>
                   </li>
 
