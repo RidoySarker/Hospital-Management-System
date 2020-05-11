@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class BedCategory extends Model
 {
     protected $table = 'bed_categories';
-    protected $primaryKey = 'category_id';
-    protected $fillable = ['category_name', 'category_details','category_floor_id'];
+    protected $primaryKey = 'bed_category_id';
+    protected $fillable = ['bed_category_name', 'bed_category_details','bed_category_floor_id'];
 
     public function validation()
     {
         return [
-            'category_name'    => 'required',
-            'category_details' => 'required',
-            'category_floor_id' => 'required',
+            'bed_category_name'    => 'required',
+            'bed_category_details' => 'required',
+            'bed_category_floor_id' => 'required',
         ];
     }
 }

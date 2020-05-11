@@ -10,11 +10,7 @@ use Toastr;
 
 class BedCategorieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $floor_data= Floor::get();
@@ -27,22 +23,6 @@ class BedCategorieController extends Controller
         return response()->json($BedCategory);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $category = New BedCategory;
@@ -67,39 +47,15 @@ class BedCategorieController extends Controller
         return response()->json($response, $status);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Bed_categorie  $bed_categorie
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Bed_categorie $bed_categorie)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Bed_categorie  $bed_categorie
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $data = BedCategory::find($id);
         return response()->json($data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Bed_categorie  $bed_categorie
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
-        $id = $request->category_id;
+        $id = $request->bed_category_id;
         $category =BedCategory::findOrFail($id);
         $validation = Validator::make($request->all(), $category->validation());
         if($validation->fails())
@@ -122,15 +78,9 @@ class BedCategorieController extends Controller
         return response()->json($response, $status);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Bed_categorie  $bed_categorie
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        BedCategory::where('category_id', $id)->delete();
+        BedCategory::where('bed_category_id', $id)->delete();
         $status = 200;
         $response = [
             "status" => $status,
