@@ -36,6 +36,8 @@ Route::resource('bed_category', 'BedCategorieController');
 Route::get('bed_category.list', 'BedCategorieController@list');
 Route::post('bed_category/update', 'BedCategorieController@update');
 Route::resource('bed', 'BedController');
+Route::get('bed.success', 'BedController@success');
+Route::post('bed/update', 'BedController@update');
 Route::resource('floor', 'FloorController');
 Route::get('floor.list', 'FloorController@list');
 Route::post('floor/update', 'FloorController@update');

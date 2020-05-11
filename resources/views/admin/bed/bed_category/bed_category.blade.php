@@ -53,12 +53,12 @@
         <div class="modal-body">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" id="category_name" name="category_name">
+            <input type="text" class="form-control" id="category_name" name="bed_category_name">
             <span id="category_name_error"></span>
           </div>
           <div class="form-group">
             <label>Floor</label>
-				<select name="category_floor_id" id="category_floor_id" class="form-control">
+				<select name="bed_category_floor_id" id="category_floor_id" class="form-control">
 					<option hidden="">Select Floor</option>
 					@foreach($floor_data as $value)
 				     <option value="{{$value->floor_id}}">{{$value->floor_name}}</option>
@@ -68,7 +68,7 @@
           </div>
           <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control" id="category_details" name="category_details"></textarea>
+            <textarea class="form-control" id="category_details" name="bed_category_details"></textarea>
             <span id="category_details_error"></span>
 	          </div>
         </div>
@@ -94,13 +94,13 @@
         <div class="modal-body">
           <div class="form-group">
             <label>Name</label>
-            <input type="text" class="form-control" id="e_category_name" name="category_name">
+            <input type="text" class="form-control" id="e_category_name" name="bed_category_name">
             <span id="category_name_edit"></span>
           </div>
           <input type="hidden" id="e_category_id">
           <div class="form-group">
             <label>Floor</label>
-				<select name="category_floor_id" id="e_category_floor_id" class="form-control">
+				<select name="bed_category_floor_id" id="e_category_floor_id" class="form-control">
 					<option hidden="">Select Floor</option>
 					@foreach($floor_data as $value)
 				     <option value="{{$value->floor_id}}">{{$value->floor_name}}</option>
@@ -110,7 +110,7 @@
           </div>
           <div class="form-group">
             <label>Description</label>
-            <textarea class="form-control" id="e_category_details" name="category_details"></textarea>
+            <textarea class="form-control" id="e_category_details" name="bed_category_details"></textarea>
             <span id="category_details_edit"></span>
 	          </div>
         </div>
@@ -192,28 +192,28 @@
         type: "get",
         dataType: "json",
         success: function(data) {
-          $("#e_category_name").val(data.category_name);
-          $("#e_category_floor_id").val(data.category_floor_id);
-          $("#e_category_details").val(data.category_details);
-          $("#e_category_id").val(data.category_id);
+          $("#e_category_name").val(data.bed_category_name);
+          $("#e_category_floor_id").val(data.bed_category_floor_id);
+          $("#e_category_details").val(data.bed_category_details);
+          $("#e_category_id").val(data.bed_category_id);
         }
       });
     });
 
 		$(document).on("submit", "#edit_form", function(e) {
 			e.preventDefault();
-		      var category_id = $("#e_category_id").val();
-		      var category_name = $("#e_category_name").val();
-		      var category_floor_id = $("#e_category_floor_id").val();
-		      var category_details = $("#e_category_details").val();
+		      var bed_category_id = $("#e_category_id").val();
+		      var bed_category_name = $("#e_category_name").val();
+		      var bed_category_floor_id = $("#e_category_floor_id").val();
+		      var bed_category_details = $("#e_category_details").val();
 
 			$.ajax({
 				url: "bed_category/update",
 				data: {
-					category_id:category_id,
-					category_name:category_name,
-					category_floor_id:category_floor_id,
-					category_details:category_details,
+					bed_category_id:bed_category_id,
+					bed_category_name:bed_category_name,
+					bed_category_floor_id:bed_category_floor_id,
+					bed_category_details:bed_category_details,
 				},
 				type: "post",
 				dataType: "json",
@@ -247,10 +247,10 @@
 					b = b.add(
 						"<tr>" +
 						"<td>" + (a++) + "</td>" +
-						"<td>" + item.category_name + "</td>" +
-						"<td>" + item.category_floor_id + "</td>" +
-						"<td>" + item.category_details + "</td>" +
-						"<td><button class='edit view btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#editModal' data='" + item.category_id + "'><i class='fa fa-edit'></i></button><button class='delete btn btn-outline-danger btn-sm' data='" + item.category_id + "'><i class='fa fa-trash'></i></button></td>" +
+						"<td>" + item.bed_category_name + "</td>" +
+						"<td>" + item.bed_category_floor_id + "</td>" +
+						"<td>" + item.bed_category_details + "</td>" +
+						"<td><button class='edit view btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#editModal' data='" + item.bed_category_id + "'><i class='fa fa-edit'></i></button><button class='delete btn btn-outline-danger btn-sm' data='" + item.bed_category_id + "'><i class='fa fa-trash'></i></button></td>" +
 						"</tr>"
 					)
 				});
