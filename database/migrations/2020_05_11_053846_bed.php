@@ -17,6 +17,7 @@ class Bed extends Migration
             $table->bigIncrements('bed_id');
             $table->string('bed_name', 110);
             $table->unsignedBigInteger('bed_category_id');
+            $table->string('bed_status', 20);
 
             $table->foreign('bed_category_id')
                 ->references('bed_category_id')->on('bed_categories')

@@ -42,7 +42,7 @@
                   <li><a><i class="fas fa-edit"></i> Patient <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{url('out_patient')}}">Out Patient</a></li>
-                      <li><a href="{{url('patient')}}">Patient List</a></li>
+                      <li><a href="{{url('in_patient')}}">In Patient</a></li>
                     </ul>
                   </li>
 
@@ -112,7 +112,6 @@
                   <li><a><i class="fas fa-bed"></i> Bed Manager <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     <li><a href="{{ url('bed') }}">Bed</a></li>
-                    <li><a href="{{ url('bed_category') }}">Bed Status</a></li>
                       <li><a href="{{ url('bed_category') }}">Bed Category</a></li>
                       <li><a href="{{ url('floor') }}">Bed Floor</a></li>
                     </ul>

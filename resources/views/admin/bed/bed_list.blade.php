@@ -36,6 +36,7 @@
                         <th>Name</th>
                         <th>Category</th>
                         <th>Floor</th>
+                        <th>Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -52,6 +53,7 @@
                             @php $floor = collect($floors)->where('floor_id', $data->bed_category_floor_id)->first() @endphp
                             {{ $floor->floor_name }}
                         </td>
+                        <td>{{ $value->bed_status }}</td>
                         <td>
                              <button  class='edit view btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#editModal' data="{{$value->bed_id}}"><i class="fa fa-edit"></i></button>
                               <button class="btn btn-outline-danger btn-sm delete" get_id="{{$value->bed_id}}"><i class="fa fa-trash-alt"></i></button>
@@ -89,6 +91,8 @@
             <input type="text" class="form-control" id="bed_name" name="bed_name">
             <span id="bed_name_error"></span>
           </div>
+          <input type="hidden" id="bed_status" name="bed_status" value="Available">
+
           <div class="form-group">
             <label>Category</label>
 				<select name="bed_category_id" id="bed_category_id" class="form-control">
