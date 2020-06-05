@@ -96,4 +96,12 @@ class BedController extends Controller
         ];
         return response()->json($response);
     }
+
+    public function available_bed(Request $request)
+    {
+        $id=$request->bed_cat_id;
+        $data=Bed::where('bed_category_id',$id)->where('bed_status','Available')
+            ->get();
+        return response()->json($data);
+    }
 }

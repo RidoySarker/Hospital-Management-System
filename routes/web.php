@@ -12,7 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
-
+ 
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index');
@@ -23,6 +23,10 @@ Route::resource('doctor', 'DoctorController');
 //Out Patient
 Route::resource('out_patient', 'OutPatientController');
 Route::get('/out_patient.datalist', 'OutPatientController@datalist');
+
+//In Patient
+Route::resource('in_patient', 'InPatientController');
+Route::get('inpatient.success', 'InPatientController@success');
 
 Route::resource('patient', 'PatientController');
 
@@ -38,6 +42,7 @@ Route::post('bed_category/update', 'BedCategorieController@update');
 Route::resource('bed', 'BedController');
 Route::get('bed.success', 'BedController@success');
 Route::post('bed/update', 'BedController@update');
+Route::get('bed.status','BedController@available_bed');
 Route::resource('floor', 'FloorController');
 Route::get('floor.list', 'FloorController@list');
 Route::post('floor/update', 'FloorController@update');

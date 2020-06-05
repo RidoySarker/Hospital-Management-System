@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\OutPatient;
 use Illuminate\Http\Request;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Doctor;
 use Validator;
 
 class OutPatientController extends Controller
 {
-    /**
+    /** 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

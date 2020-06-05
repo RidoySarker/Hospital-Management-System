@@ -8,7 +8,7 @@ class Bed extends Model
 {
     protected $table = 'beds';
     protected $primaryKey = 'bed_id';
-    protected $fillable = ['bed_name', 'bed_category_id'];
+    protected $fillable = ['bed_name', 'bed_category_id','bed_status'];
 
     public function validation()
     {
