@@ -7,10 +7,18 @@ use Illuminate\Http\Request;
 use App\Doctor;
 use App\BedCategory;
 use App\Bed;
+use App\Floor;
+use Toastr;
 use Validator;
 
 class InPatientController extends Controller
 {
+
+    public function success(Request $request)
+    {
+        Toastr::success($request->status.' Successfully', '', ["positionClass" => "toast-top-right"]);
+        return redirect()->back();
+    }
     /** 
      * Display a listing of the resource.
      *
@@ -21,13 +29,9 @@ class InPatientController extends Controller
         $data['doctors'] = Doctor::all();
         $data['bed_categorys'] = BedCategory::all();
         $data['beds'] = Bed::all();
+        $data['floors'] = Floor::all();
+        $data['inpatient'] = InPatient::all();
         return view('admin.patient.in_patient.in_patient_list', $data);
-    }
-
-    public function datalist()
-    {
-        $inpatient = InPatient::orderBy('in_p_id', 'desc')->get();
-        return response()->json($inpatient);
     }
 
     public function store(Request $request)
@@ -47,6 +51,8 @@ class InPatientController extends Controller
                 "status" => $status,
                 "data"   => $inpatient,
             ];
+            $bed_status=['bed_status'=>'Alloted'];
+            Bed::where('bed_id',$request->in_p_bed_id)->update($bed_status);
         }
         return response()->json($response, $status);
     }

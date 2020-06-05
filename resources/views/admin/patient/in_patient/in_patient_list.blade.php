@@ -28,11 +28,40 @@
                                                 <th>Guardian Phone</th>
                                                 <th>Case</th>
                                                 <th>Doctor</th>
+                                                <th>Bed</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="da">
-                                        </tbody>
+										<tbody>
+											@php $i=0 @endphp
+											@foreach($inpatient as $value)
+											<tr>
+											<td>{{ ++$i }}</td>
+											<td>{{ $value->in_p_s }}</td>
+											<td>{{ $value->in_p_name }}</td>
+											<td>{{ $value->in_p_guardian_name }}</td>
+											<td>{{ $value->in_p_guardian_phone }}</td>
+											<td>{{ $value->in_p_case }}</td>
+											<td>@php $doctor= collect($doctors)->where('doc_id',$value->in_p_doc_id)->first() @endphp
+												{{$doctor->doc_name}}
+											</td>
+											<td>
+												@php $bed= collect($beds)->where('bed_id',$value->in_p_bed_id)->first() @endphp
+												@php $bed_category = collect($bed_categorys)->where('bed_category_id', $value->in_p_bed_category_id)->first() @endphp
+												@php $floor = collect($floors)->where('floor_id', $bed_category->bed_category_floor_id)->first() @endphp
+												{{ $bed->bed_name }} - {{$bed_category->bed_category_name}} - {{ $floor->floor_name }}
+											</td>
+											<td>
+												<button  class='edit view btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#editModal' data="{{$value->in_p_id}}"><i class="fa fa-edit"></i></button>
+												<button class="btn btn-outline-danger btn-sm delete" data="{{$value->in_p_id}}"><i class="fa fa-trash-alt"></i></button>
+												<form method="get" id="success" action="{{url('inpatient.success')}}">
+													<input type="hidden" readonly name="status" id="status">
+												<button id="success" type="submit" hidden></button>
+												</form>
+												</td>
+											</tr>
+											@endforeach
+											</tbody>
                                     </table>
                                 </div>
                             </div>
@@ -287,7 +316,7 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-	// $(document).ready(function() {
+	$(document).ready(function() {
 
         $("#in_p_bed_category_id").change(function(){
             var bed_cat_id=$(this).val();
@@ -309,95 +338,67 @@
             });
         });
 
-	// 	dataList();
-	// 	$(document).on("submit", "#form", function(e) {
-	// 		e.preventDefault();
-	// 		var data = $(this).serializeArray();
+		$(document).on("submit", "#form", function(e) {
+			e.preventDefault();
+			var data = $(this).serializeArray();
 
-	// 		$.ajax({
-	// 			url     : "{{route('out_patient.store')}}",
-	// 			data    : data,
-	// 			type    : "post",
-	// 			dataType: "json",
-	// 			success: function(data) {
-	// 				toastr["success"]("Out Patient Added Succesfully");
-	// 				$("#myModal").modal("hide");
-	// 				$("#form").trigger("reset");
-	// 				dataList();
-	// 			}, error: function(errors) {
-	// 				let error = JSON.parse(errors.responseText).errors;
-	// 		        $.each(error,function(i,message){
-	// 		            $("#"+i+"_error").html('<span class="help-block" style="color:red;">'+message+'</span>');
-	// 		        });
-	// 			}
-	// 		});
-	// 	});
+			$.ajax({
+				url     : "{{route('in_patient.store')}}",
+				data    : data,
+				type    : "post",
+				dataType: "json",
+				success: function(data) {
+				$('#status').val('Inserted');
+          		$('#success').submit();
+				}, error: function(errors) {
+					let error = JSON.parse(errors.responseText).errors;
+			        $.each(error,function(i,message){
+			            $("#"+i+"_error").html('<span class="help-block" style="color:red;">'+message+'</span>');
+			        });
+				}
+			});
+		});
 
-	// 	$(document).on("click", ".delete", function() {
-	// 	    var data = $(this).attr("data");
+		$(document).on("click", ".delete", function() {
+		    var data = $(this).attr("data");
 
-	// 	    swal({
-	// 	      title: "Are you sure?",
-	// 	      text: "Once deleted, you will not be able to recover this data!",
-	// 	      icon: "warning",
-	// 	      buttons: true,
-	// 	      dangerMode: true,
-	// 	    })
-	// 	    .then((willDelete) => {
-	// 	      if (willDelete) {
-	// 	        $.ajax({
-	// 	          url     : "/out_patient/"+data,
-	// 	          type    : "delete",
-	// 	          dataType: "json",
-	// 	          success: function(data) {
-	// 	            if (data.status==200) {
-	// 	              toastr["success"]("Out Patient data deleted Succesfully");
-	// 	              dataList();
-	// 	            } else {
-	// 	              toastr["error"]("Something Went Wrong");
-	// 	            }
-	// 	          }
-	// 	        });
-	// 	        } else { 
-	// 	            swal("Your Data is safe!");
-	// 	        }
-	// 	     });
-	// 	  });
-	// });
+		    swal({
+		      title: "Are you sure?",
+		      text: "Once deleted, you will not be able to recover this data!",
+		      icon: "warning",
+		      buttons: true,
+		      dangerMode: true,
+		    })
+		    .then((willDelete) => {
+		      if (willDelete) {
+		        $.ajax({
+		          url     : "/in_patient/"+data,
+		          type    : "delete",
+		          dataType: "json",
+		          success: function(data) {
+		            if (data.status==200) {
+						$('#status').val('Deleted');
+          				$('#success').submit();
+		            } else {
+		              toastr["error"]("Something Went Wrong");
+		            }
+		          }
+		        });
+		        } else { 
+		            swal("Your Data is safe!");
+		        }
+		     });
+		  });
+	});
 
-	// function dataList() {
-	// 	$.ajax({
-	// 		url     : "/out_patient.datalist",
-	// 		type    : "get",
-	// 		dataType: "html",
-	// 		success: function(data) {
-	// 			var data = JSON.parse(data);
-	// 			var a = 1;
-	// 			var b = $();
-	// 	        $.each(data, function (i, item) {
-	// 	            b = b.add(
-	//                     "<tr>"+
-	//                     "<td>"+ (a++) +"</td>"+
-	//                     "<td>"+item.out_p_s+"</td>"+
-	//                     "<td>"+item.out_p_name+"</td>"+
-	//                     "<td>"+item.out_p_age+"</td>"+
-	//                     "<td>"+item.out_p_phone+"</td>"+
-	//                     "<td>"+item.out_p_address+"</td>"+
-	//                     "<td><button class='view btn btn-outline-primary btn-sm' data='"+item.out_p_id+"'><i class='fa fa-eye'></i></button><button class='delete btn btn-outline-danger btn-sm' data='"+item.out_p_id+"'><i class='fa fa-trash'></i></button></td>"+
-	//                     "</tr>"
-	//                 )
-	// 	        });
-	// 	        $("#da").html(b);
-	// 	        $("#example").dataTable();
-	// 		}
-	// 	});
-	// }
 
-	// jQuery(function($) {
-    //     $("#out_p_ap_date").datetimepicker({
-    //     	dateFormat: 'yy-mm-dd',
-    //     	timeFormat: 'hh:mm:ss',
-    //     });
-    // });
+	$("#example").dataTable();
+
+	jQuery(function($) {
+        $("#in_p_admission_date").datetimepicker({
+        	dateFormat: 'yy-mm-dd',
+        	timeFormat: 'hh:mm:ss',
+        });
+    });
 </script>
 @endsection

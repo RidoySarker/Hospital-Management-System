@@ -53,7 +53,7 @@
                             @php $floor = collect($floors)->where('floor_id', $data->bed_category_floor_id)->first() @endphp
                             {{ $floor->floor_name }}
                         </td>
-                        <td>{{ $value->bed_status }}</td>
+                        <td @if($value->bed_status=='Alloted') style='background-color:red;' @endif>{{ $value->bed_status }}</td>
                         <td>
                              <button  class='edit view btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#editModal' data="{{$value->bed_id}}"><i class="fa fa-edit"></i></button>
                               <button class="btn btn-outline-danger btn-sm delete" get_id="{{$value->bed_id}}"><i class="fa fa-trash-alt"></i></button>

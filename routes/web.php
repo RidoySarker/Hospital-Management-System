@@ -26,7 +26,7 @@ Route::get('/out_patient.datalist', 'OutPatientController@datalist');
 
 //In Patient
 Route::resource('in_patient', 'InPatientController');
-Route::get('/in_patient.datalist', 'InPatientController@datalist');
+Route::get('inpatient.success', 'InPatientController@success');
 
 Route::resource('patient', 'PatientController');
 
