@@ -9,7 +9,7 @@ class OutPatient extends Model
 {
     protected $table = 'out_patients';
     protected $primaryKey = 'out_p_id';
-    protected $fillable = ['out_p_name', 'out_p_sex', 'out_p_age', 'out_p_phone', 'out_p_blood', 'out_p_height', 'out_p_weight', 'out_p_bp', 'out_p_symptoms', 'out_p_address', 'out_p_ap_date', 'out_p_doc_id', 'out_p_note'];
+    protected $fillable = ['out_p_name', 'out_p_sex', 'out_p_age', 'out_p_phone', 'out_p_blood', 'out_p_height', 'out_p_weight', 'out_p_bp', 'out_p_symptoms', 'out_p_address'];
 
     public function validation()
     {
@@ -20,7 +20,6 @@ class OutPatient extends Model
 	    	'out_p_phone'   => 'required',
 	    	'out_p_sex'     => 'required',
 	    	'out_p_blood'   => 'required',
-	    	'out_p_doc_id'  => 'required',
 	    ];
     }
 

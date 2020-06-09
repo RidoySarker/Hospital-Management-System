@@ -126,11 +126,11 @@
   <div class="modal-dialog modal-lg">
     <form id="form" method="post">
       <div class="modal-content">
-        <div class="modal-header" style="background-color:  #808080; height: 60px;">
-          <h5 class="modal-title" style="color: white;">Add Appointment</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" style="color: white;">&times;</span></button>
-        </div>
+      <div class="modal-header" style="background-color:  #808080; height: 60px;">
+	               	<h5 class="modal-title" style="color: white;">Appointment</h5>
+	             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	               	<span aria-hidden="true" style="color: white;">&times;</span></button>
+	           	</div>
         <div class="modal-body">
           <div class="row">
 
@@ -225,12 +225,11 @@
 <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title">Appointment</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-        </button>
-      </div>
+    <div class="modal-header" style="background-color:  #808080; height: 60px;">
+	               	<h5 class="modal-title" style="color: white;">Appointment</h5>
+	             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	               	<span aria-hidden="true" style="color: white;">&times;</span></button>
+	           	</div>
       <div class="modal-body">
         <div>
           <h6 style="display:inline"><b>Appointment Date:</b></h6>

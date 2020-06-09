@@ -16,8 +16,7 @@ class OutPatientController extends Controller
      */
     public function index()
     {
-        $doctor = Doctor::all();
-        return view('admin.patient.out_patient.out_patient_list', ['doctor' => $doctor]);
+        return view('admin.patient.out_patient.out_patient_list');
     }
 
     public function datalist()
@@ -26,22 +25,6 @@ class OutPatientController extends Controller
         return response()->json($outpatient);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $outpatient = new OutPatient;
@@ -64,46 +47,13 @@ class OutPatientController extends Controller
         return response()->json($response, $status);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\OutPatient  $outPatient
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OutPatient $outPatient)
+    public function show(Request $request)
     {
-        //
+        $id=$request->id;
+        $patient=OutPatient::find($id);
+        return response()->json($patient);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\OutPatient  $outPatient
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OutPatient $outPatient)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\OutPatient  $outPatient
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, OutPatient $outPatient)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\OutPatient  $outPatient
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         OutPatient::where('out_p_id', $id)->delete();
