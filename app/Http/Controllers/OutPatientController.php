@@ -60,6 +60,7 @@ class OutPatientController extends Controller
                 "data"   => $outpatient,
             ];
         }
+        
         return response()->json($response, $status);
     }
 

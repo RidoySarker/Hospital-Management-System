@@ -5,91 +5,81 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Appointment;
 use App\Doctor;
-use App\Patient;
+use App\OutPatient;
 use Validator;
 use Toastr;
 
 class AppointmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function success(Request $request)
+    {
+        Toastr::success($request->status.' Successfully', '', ["positionClass" => "toast-top-right"]);
+        return redirect()->back();
+    }
+
     public function index()
-    {
-        return view('admin.appointment.appointment_list');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    { 
+        $appointment = Appointment::all();
         $doctor = Doctor::all();
-        return view('admin.appointment.add_appointment', ['doctor' => $doctor]);
+        $patients = OutPatient::all();
+        return view('admin.appointment.appointment_list', ['appointments'=>$appointment,'doctors' => $doctor,'patients'=>$patients]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function patient($id)
+    {
+        $data = OutPatient::find($id);
+        echo json_encode($data);
+    }
+ 
     public function store(Request $request)
     {
-        $model = new Appointment;
-        $validation = Validator::make($request->all(), $model->validation(), $model->message());
+        $appointment = new Appointment;
+        $validation = Validator::make($request->all(), $appointment->validation());
         if($validation->fails()) {
-            Toastr::warning('Validation Failed', '', ["positionClass" => "toast-top-right"]);
-            return back()->withErrors($validation)->withInput($request->all());
+            $status = 400;
+            $response = [
+                "status" => $status,
+                "errors"   => $validation->errors(),
+            ];
+        } else {
+            $appointment->fill($request->all())->save();
+            $status = 201;
+            $response = [
+                "status" => $status,
+                "data"   => $appointment,
+            ];
         }
+        return response()->json($response, $status);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Appointment $appointment)
+    public function show(Request $request)
     {
-        //
+        $id=$request->id;
+        $data['appointment']=$appointment=Appointment::find($id);
+        $data['patient']=OutPatient::find($appointment->app_p_id);
+        $data['doctor']=Doctor::find($appointment->app_doc_id);
+        return response()->json($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Appointment $appointment)
+    public function update(Request $request)
     {
-        //
+        $id=$request->id;
+        $status=['app_status'=>$request->status];
+        Appointment::where('app_id',$id)->update($status);
+        $status = 200;
+        $response = [
+            "status" => $status,
+        ];
+        return response()->json($response);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Appointment $appointment)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Appointment  $appointment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Appointment $appointment)
-    {
-        //
+        Appointment::where('app_id', $id)->delete();
+        $status = 200;
+        $response = [
+            "status" => $status,
+        ];
+        return response()->json($response);
     }
 }
