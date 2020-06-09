@@ -28,6 +28,7 @@ Route::get('out_patient.show', 'OutPatientController@show');
 //In Patient
 Route::resource('in_patient', 'InPatientController');
 Route::get('inpatient.success', 'InPatientController@success');
+Route::get('inpatient.show', 'InPatientController@show');
 
 Route::resource('employee', 'EmployeeController');
 Route::get('employees', 'EmployeeController@list')->name('employee.list');
