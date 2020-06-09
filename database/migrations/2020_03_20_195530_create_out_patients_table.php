@@ -26,12 +26,7 @@ class CreateOutPatientsTable extends Migration
             $table->string('out_p_bp', 50);
             $table->string('out_p_symptoms', 50);
             $table->string('out_p_address', 110);
-            $table->dateTime('out_p_ap_date', 0);
-            $table->unsignedBigInteger('out_p_doc_id');
-            $table->string('out_p_note', 100);
-            $table->foreign('out_p_doc_id')
-                ->references('doc_id')->on('doctors')
-                ->onDelete('cascade');
+        
             $table->timestamps();
         });
     }

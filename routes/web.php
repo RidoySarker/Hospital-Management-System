@@ -23,6 +23,7 @@ Route::resource('doctor', 'DoctorController');
 //Out Patient
 Route::resource('out_patient', 'OutPatientController');
 Route::get('/out_patient.datalist', 'OutPatientController@datalist');
+Route::get('out_patient.show', 'OutPatientController@show');
 
 //In Patient
 Route::resource('in_patient', 'InPatientController');
