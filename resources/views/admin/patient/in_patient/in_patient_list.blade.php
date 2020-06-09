@@ -49,10 +49,10 @@
 												@php $bed= collect($beds)->where('bed_id',$value->in_p_bed_id)->first() @endphp
 												@php $bed_category = collect($bed_categorys)->where('bed_category_id', $value->in_p_bed_category_id)->first() @endphp
 												@php $floor = collect($floors)->where('floor_id', $bed_category->bed_category_floor_id)->first() @endphp
-												{{ $bed->bed_name }} - {{$bed_category->bed_category_name}} - {{ $floor->floor_name }}
+												{{ $bed->bed_name }} - {{ $floor->floor_name }} - {{$bed_category->bed_category_name}}
 											</td>
 											<td>
-												<button  class='edit view btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#editModal' data="{{$value->in_p_id}}"><i class="fa fa-edit"></i></button>
+												<button  class='show btn btn-outline-primary btn-sm' data-toggle='modal' data-target='#showModal' data="{{$value->in_p_id}}"><i class="fa fa-eye"></i></button>
 												<button class="btn btn-outline-danger btn-sm delete" data="{{$value->in_p_id}}"><i class="fa fa-trash-alt"></i></button>
 												<form method="get" id="success" action="{{url('inpatient.success')}}">
 													<input type="hidden" readonly name="status" id="status">
@@ -313,6 +313,105 @@
         </form>
     </div>
  </div>
+
+ <!-- SHOW MODAL -->
+<div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+	<div class="modal-header" style="background-color:  #808080; height: 60px;">
+	               	<h5 class="modal-title" style="color: white;">In Patient</h5>
+	             	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	               	<span aria-hidden="true" style="color: white;">&times;</span></button>
+	           	</div>
+      <div class="modal-body">
+	  <div>
+          <h6 style="display:inline"><b>Admission Date:</b></h6>
+          <p style="display:inline" id="s_add_date"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Patient Sl:</b></h6>
+          <p style="display:inline" id="s_p_sl"></p>
+		</div>
+        <div>
+          <h6 style="display:inline"><b>Patient Name:</b></h6>
+          <p style="display:inline" id="s_p_name"></p>
+		</div>
+		<div>
+		  <h6 style="display:inline"><b>Blood Group:</b></h6>
+		  <p id="s_p_bg" style="display:inline"></p>
+		</div>
+        <div>
+          <h6 style="display:inline"><b>Gender:</b></h6>
+          <p style="display:inline" id="s_p_gender"></p>
+        </div>
+        <div>
+          <h6 style="display:inline"><b>Age:</b></h6>
+          <p style="display:inline" id="s_p_age"></p>
+        </div>
+        <div>
+          <h6 style="display:inline"><b>Height:</b></h6>
+          <p id="s_p_height" style="display:inline"></p>
+        </div>
+        <div>
+          <h6 style="display:inline"><b>Weight:</b></h6>
+          <p id="s_p_weight" style="display:inline"></p>
+        </div>
+        <div>
+          <h6 style="display:inline"><b>Phone:</b></h6>
+          <p id="s_p_phone" style="display:inline"></p>
+        </div>
+        <div>
+          <h6 style="display:inline"><b>Adress:</b></h6>
+          <p id="s_p_adress" style="display:inline"></p>
+        </div>
+        <div>
+          <h6 style="display:inline"><b>BP:</b></h6>
+          <p id="s_p_bp" style="display:inline"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Symptoms:</b></h6>
+          <p id="s_p_symptoms" style="display:inline"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Case:</b></h6>
+          <p style="display:inline" id="s_p_case"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Casualty:</b></h6>
+		  <p style="display:inline" id="s_p_casualty"></p>
+		  &nbsp&nbsp&nbsp
+		  <h6 style="display:inline"><b>Old Patient:</b></h6>
+          <p style="display:inline" id="s_p_old"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Guardian Name:</b></h6>
+          <p style="display:inline" id="s_p_guard_name"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Guardian Phone:</b></h6>
+          <p style="display:inline" id="s_p_guard_phone"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Reference:</b></h6>
+          <p style="display:inline" id="s_p_reference"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Doctor:</b></h6>
+          <p style="display:inline" id="s_p_doc"></p>
+		</div>
+		<div>
+          <h6 style="display:inline"><b>Bed:</b></h6>
+          <p style="display:inline" id="s_p_bed"></p>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -389,6 +488,42 @@
 		        }
 		     });
 		  });
+
+	$(document).on('click', '.show', function() {
+      var id = $(this).attr("data");
+      $.ajax({
+        url: "{{url('inpatient.show')}}",
+        type: 'get',
+        data: {
+          id: id
+        },
+        dataType: 'json',
+        success: function(data) {
+          $("#s_p_name").text(data.patient.in_p_name);
+          $("#s_p_bg").text(data.patient.in_p_blood);
+          $("#s_p_gender").text(data.patient.in_p_sex);
+          $("#s_p_age").text(data.patient.in_p_age);
+          $("#s_p_height").text(data.patient.in_p_height);
+          $("#s_p_weight").text(data.patient.in_p_weight);
+          $("#s_p_phone").text(data.patient.in_p_phone);
+          $("#s_p_adress").text(data.patient.in_p_address);
+          $("#s_p_bp").text(data.patient.in_p_bp);
+		  $('#s_p_symptoms').text(data.patient.in_p_symptoms);
+
+		  $('#s_add_date').text(data.patient.in_p_admission_date);
+		  $('#s_p_sl').text(data.patient.in_p_s);
+		  $('#s_p_case').text(data.patient.in_p_case);
+		  $('#s_p_casualty').text(data.patient.in_p_casualty);
+		  $('#s_p_old').text(data.patient.in_p_old_patient);
+		  $('#s_p_guard_name').text(data.patient.in_p_guardian_name);
+		  $('#s_p_guard_phone').text(data.patient.in_p_guardian_phone);
+		  $('#s_p_reference').text(data.patient.in_p_reference);
+		  $('#s_p_doc').text(data.doctor.doc_name);
+		  $('#s_p_bed').text(data.bed.bed_name+"-"+data.bed_cat.bed_category_name);
+        }
+      });
+    });
+
 	});
 
 

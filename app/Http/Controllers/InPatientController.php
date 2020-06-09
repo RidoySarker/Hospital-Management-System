@@ -57,40 +57,16 @@ class InPatientController extends Controller
         return response()->json($response, $status);
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $id=$request->id;
+        $data['patient']=$patient=InPatient::find($id);
+        $data['doctor']=Doctor::find($patient->in_p_doc_id);
+        $data['bed_cat']=BedCategory::find($patient->in_p_bed_category_id);
+        $data['bed']=Bed::find($patient->in_p_bed_id);
+        return response()->json($data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         InPatient::where('in_p_id', $id)->delete();
