@@ -39,6 +39,7 @@
                         <th>Image</th>
                         <th>Name</th>
                         <th>Phone</th>
+                        <th>Patient Left</th>
                         <th>Email</th>
                         <th>Department</th>
                         <th>Action</th>
