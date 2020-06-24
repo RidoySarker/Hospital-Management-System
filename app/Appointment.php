@@ -31,6 +31,11 @@ class Appointment extends Model
     	];
 	}
 	
+	public function patient()
+    {
+        return $this->belongsTo("App\OutPatient", "app_p_id");
+    }
+
 	public static function boot()
 	{
 	    parent::boot();

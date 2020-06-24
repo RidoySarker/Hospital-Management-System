@@ -50,7 +50,7 @@
                                   <select class="form-control" id="patient" name="patient">
                                    <option>Select Patient</option>
                                    @foreach($patient as $patients)
-                                   <option value="{{$patients->p_id}}" {{$prescription->prescription_p_id==$patients->p_id ? 'selected' : ''}}>{{$patients->p_name}} ({{$patients->p_s}})</option>
+                                   <option value="{{$patients->out_p_id}}" {{$prescription->prescription_p_id==$patients->out_p_id ? 'selected' : ''}}>{{$patients->out_p_name}} ({{$patients->out_p_s}})</option>
                                    @endforeach
                                   </select>
 

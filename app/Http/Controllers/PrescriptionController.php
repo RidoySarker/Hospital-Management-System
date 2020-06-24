@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Patient;
+use App\OutPatient;
 use App\Doctor;
 use App\Medicine;
 use App\Prescription;
@@ -24,7 +24,7 @@ class PrescriptionController extends Controller
     {
       $data['prescription']=Prescription::orderBy('prescription_id','desc')->get();
       $data['medicines']=Prescription_Medicine::get();
-      $data['patients']=Patient::get();
+      $data['patients']=OutPatient::get();
       $data['doctors']=Doctor::get();
       $data['meds']=Medicine::get();
       return view('admin.prescription.list',$data);
@@ -33,7 +33,7 @@ class PrescriptionController extends Controller
     public function create()
     {
       $data['doctor']=Doctor::orderBy('doc_name','asc')->get();
-      $data['patient']=Patient::orderBy('p_name','asc')->get();
+      $data['patient']=OutPatient::orderBy('out_p_name','asc')->get();
       $data['medicine']=Medicine::orderBy('med_name')->get();
       return view('admin.prescription.add_prescription',$data);
     }
@@ -82,7 +82,7 @@ class PrescriptionController extends Controller
       $id=$request->id;
       $data['prescription']=Prescription::find($id);
       $data['pre_medicine']=Prescription_Medicine::where('prescription_id',$id)->get();
-      $data['patients']=Patient::get();
+      $data['patients']=OutPatient::get();
       $data['doctors']=Doctor::get();
       $data['meds']=Medicine::get();
       return view('admin.prescription.invoice',$data);
@@ -94,7 +94,7 @@ class PrescriptionController extends Controller
       $data['prescription']=Prescription::find($id);
       $data['pre_medicine']=Prescription_Medicine::where('prescription_id',$id)->get();
       $data['doctor']=Doctor::orderBy('doc_name','asc')->get();
-      $data['patient']=Patient::orderBy('p_name','asc')->get();
+      $data['patient']=OutPatient::orderBy('out_p_name','asc')->get();
       $data['medicine']=Medicine::orderBy('med_name')->get();
       return view('admin.prescription.edit_prescription',$data);
     }
