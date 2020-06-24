@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
@@ -24,7 +13,7 @@ Route::resource('doctor', 'DoctorController');
 Route::resource('out_patient', 'OutPatientController');
 Route::get('/out_patient.datalist', 'OutPatientController@datalist');
 Route::get('out_patient.show', 'OutPatientController@show');
-
+ 
 //In Patient
 Route::resource('in_patient', 'InPatientController');
 Route::get('inpatient.success', 'InPatientController@success');
@@ -41,6 +30,9 @@ Route::get('appointment/patient/{id}', 'AppointmentController@patient');
 Route::get('appointment.success', 'AppointmentController@success');
 Route::get('appointment.update', 'AppointmentController@update');
 Route::get('appointment.show', 'AppointmentController@show');
+Route::resource('appointmentReport', 'AppointmentReportController');
+Route::get('appointmentReport.show', 'AppointmentReportController@show');
+
 
 Route::resource('bed_category', 'BedCategorieController');
 Route::get('bed_category.list', 'BedCategorieController@list');

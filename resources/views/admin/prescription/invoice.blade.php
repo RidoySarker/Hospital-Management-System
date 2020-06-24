@@ -25,12 +25,12 @@
               <div class="col-sm-4 invoice-col">
                 Patient
                 <address>
-                  <strong>@php $patient=collect($patients)->where('p_id',$prescription->prescription_p_id)->first(); @endphp
-                    Name: {{$patient->p_name}}</strong>
-                  <br>Age: {{$patient->p_age}} Year(s)
-                  <br>Sex: {{($patient->p_sex==1 ? 'Male' : 'Female' )}}
-                  <br>Phone: {{$patient->p_phone}}
-                  <br>Address: {{$patient->p_address}}
+                  <strong>@php $patient=collect($patients)->where('out_p_id',$prescription->prescription_p_id)->first(); @endphp
+                    Name: {{$patient->out_p_name}}</strong>
+                  <br>Age: {{$patient->out_p_age}} Year(s)
+                  <br>Sex: {{($patient->out_p_sex=='Male' ? 'Male' : 'Female' )}}
+                  <br>Phone: {{$patient->out_p_phone}}
+                  <br>Address: {{$patient->out_p_address}}
                 </address>
               </div>
 

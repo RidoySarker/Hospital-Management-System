@@ -20,8 +20,8 @@
             <td>{{ $sl++ }}</td>
             <td>{{ $value->prescription_code }}</td>
             <td>{{ $value->prescription_date }}</td>
-            <td>@php $patient=collect($patients)->where('p_id',$value->prescription_p_id)->first(); @endphp
-              {{$patient->p_name}}
+            <td>@php $patient=collect($patients)->where('out_p_id',$value->prescription_p_id)->first(); @endphp
+              {{$patient->out_p_name}}
             </td>
             <td>
               @php $doctor=collect($doctors)->where('doc_id',$value->prescription_doc_id)->first(); @endphp
