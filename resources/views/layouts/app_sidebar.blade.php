@@ -23,100 +23,100 @@
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <ul class="nav side-menu">
-                <li><a href="/"><i class="fas fa-home"></i> Dashboard </a>
+                <li><a href="/"><i class="fas fa-home"></i> @lang('admin_menu.dashboard') </a>
 
                 </li>
-                  <li><a><i class="fas fa-sitemap"></i> Department <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-sitemap"></i> @lang('admin_menu.department') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{url('department')}}">Department List</a></li>
+                      <li><a href="{{url('department')}}">@lang('admin_menu.department_list')</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-user-md"></i> Doctor <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-user-md"></i> @lang('admin_menu.doctor') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{route('doctor.create')}}">Add Doctor</a></li>
-                      <li><a href="{{url('doctor')}}">Doctor List</a></li>
+                      <li><a href="{{route('doctor.create')}}">@lang('admin_menu.add_doctor')</a></li>
+                      <li><a href="{{url('doctor')}}">@lang('admin_menu.doctor_list')</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-edit"></i> Patient <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> @lang('admin_menu.patient') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{url('out_patient')}}">Out Patient</a></li>
-                      <li><a href="{{url('in_patient')}}">In Patient</a></li>
+                      <li><a href="{{url('out_patient')}}">@lang('admin_menu.out_patient')</a></li>
+                      <li><a href="{{url('in_patient')}}">@lang('admin_menu.in_patient')</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-user-md"></i> Appointment <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-user-md"></i> @lang('admin_menu.appointment') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{ url('appointment') }}">Appointment List</a></li>
+                      <li><a href="{{ url('appointment') }}">@lang('admin_menu.appointment_list')</a></li>
                     </ul>
                   </li>
 
 
-                  <li><a><i class="fas fa-users"></i> HRM <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-users"></i> @lang('admin_menu.hrm') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{route('employee_role.index')}}">Employee Roles</a></li>
-                      <li><a href="{{route('employee.index')}}">Employee List</a></li>
-                      <li><a href="{{route('employee.create')}}">Add Employee</a></li>
+                      <li><a href="{{route('employee_role.index')}}">@lang('admin_menu.emp_roles')Employee Roles</a></li>
+                      <li><a href="{{route('employee.index')}}">@lang('admin_menu.emp_list')</a></li>
+                      <li><a href="{{route('employee.create')}}">@lang('admin_menu.add_emp')</a></li>
 
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-dollar-sign"></i> Financial Activities <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-dollar-sign"></i> @lang('admin_menu.finance') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="/expense_category">Expense Category</a></li>
-                      <li><a href="/expense/create">Add Expense</a></li>
-                      <li><a href="/expense">Expense List</a></li>
+                      <li><a href="/expense_category">@lang('admin_menu.exp_cat')</a></li>
+                      <li><a href="/expense/create">@lang('admin_menu.add_exp')</a></li>
+                      <li><a href="/expense">@lang('admin_menu.exp_list')</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-pills"></i> Medicine <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-pills"></i> @lang('admin_menu.medicine') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{route('medicine_category.index')}}">Medicine Category</a></li>
-                      <li><a href="{{route('medicine.index')}}">Medicine List</a></li>
-                      <li><a href="{{route('medicine.create')}}">Add Medicine</a></li>
+                      <li><a href="{{route('medicine_category.index')}}">@lang('admin_menu.medicine_cat')</a></li>
+                      <li><a href="{{route('medicine.index')}}">@lang('admin_menu.medicine_list')</a></li>
+                      <li><a href="{{route('medicine.create')}}">@lang('admin_menu.add_medicine')</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-notes-medical"></i> Prescription <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-notes-medical"></i> @lang('admin_menu.prescription') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{route('prescription.create')}}">Add Prescription</a></li>
-                      <li><a href="{{route('prescription.index')}}">Prescription List</a></li>
+                      <li><a href="{{route('prescription.create')}}">@lang('admin_menu.add_prescription')</a></li>
+                      <li><a href="{{route('prescription.index')}}">@lang('admin_menu.prescription_list')</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-flask"></i> Lab Tests <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-flask"></i> @lang('admin_menu.lab') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-hands"></i> Donor <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-hands"></i> @lang('admin_menu.donor') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{route('donor.create')}}">Add Donor</a></li>
-                      <li><a href="{{url('donor')}}">Donor List</a></li>
-                      <li><a href="{{url('bloodbank')}}">Blood Bank</a></li>
+                      <li><a href="{{route('donor.create')}}">@lang('admin_menu.add_donor')</a></li>
+                      <li><a href="{{url('donor')}}">@lang('admin_menu.donor_list')</a></li>
+                      <li><a href="{{url('bloodbank')}}">@lang('admin_menu.blood_bank')</a></li>
                     </ul>
                   </li>
 
 
-                  <li><a><i class="fas fa-bed"></i> Bed Manager <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-bed"></i> @lang('admin_menu.bed_manager') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    <li><a href="{{ url('bed') }}">Bed</a></li>
-                      <li><a href="{{ url('bed_category') }}">Bed Category</a></li>
-                      <li><a href="{{ url('floor') }}">Bed Floor</a></li>
+                    <li><a href="{{ url('bed') }}">@lang('admin_menu.bed')</a></li>
+                      <li><a href="{{ url('bed_category') }}">@lang('admin_menu.bed_cat')</a></li>
+                      <li><a href="{{ url('floor') }}">@lang('admin_menu.bed_floor')</a></li>
                     </ul>
                   </li>
 
 
-                  <li><a><i class="fas fa-edit"></i> Report <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> @lang('admin_menu.report') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{url('appointmentReport')}}">Appointment Report</a></li>
+                      <li><a href="{{url('appointmentReport')}}">@lang('admin_menu.app_report')</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fas fa-edit"></i> Noticeboard <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> @lang('admin_menu.notice') <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Add Department</a></li>
                       <li><a href="form_advanced.html">Department List</a></li>
