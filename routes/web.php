@@ -70,3 +70,5 @@ Route::resource('expense_category', 'ExpenseCategorieController');
 Route::resource('expense', 'ExpenseController');
 Route::get('expenses', 'ExpenseController@list')->name('expense.list');
 Route::post('expense/{id}/update', 'ExpenseController@update')->name('expense.update');
+
+Route::post('locale','LocalizationController@lang')->name('locale');

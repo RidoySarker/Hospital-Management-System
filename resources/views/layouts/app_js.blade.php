@@ -1,3 +1,5 @@
+  </body>
+
     <script src="/js/all.js"></script>
     <script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -28,8 +30,22 @@
         }
     });
     </script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#lang").change(function(){
+        var lang = $(this).val();
+        $.ajax({
+            url:"/locale",
+            data:{lang:lang},
+            type:"post",
+            success:function(data)
+            {
+                location.reload();
+            }
+        });
+    });
+});
+</script>
     @yield('script')
     {!! Toastr::message() !!}
-  </body>
 </html>

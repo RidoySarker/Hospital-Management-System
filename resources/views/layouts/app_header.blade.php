@@ -1,3 +1,15 @@
+ <style type="text/css">
+.flag{
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    float: left;
+    height: 18px;
+    margin: 2px 6px 0 0;
+    overflow: hidden;
+    text-indent: -9999px;
+    width: 18px;
+  }
+ </style>
       <!-- top navigation -->
       <div class="top_nav">
           <div class="nav_menu">
@@ -85,6 +97,17 @@
                     </li>
                   </ul>
                 </li>
+
+                <li class="nav-item dropdown open" style="padding-right: 15px;">
+                <img src="/{{session()->get('locale')}}.jpg" class="flag" alt="flag">
+                 <select name="lang" id="lang">
+                   <option value="en" @if(session()->get('locale') == 'en') {{'selected'}} @endif>en</option>
+                   <option value="bn" @if(session()->get('locale') == 'bn') {{'selected'}} @endif>bn</option>
+                   <option value="ar" @if(session()->get('locale') == 'ar') {{'selected'}} @endif>ar</option>
+                 </select> 
+                 
+                </li>
+
               </ul>
             </nav>
           </div>
