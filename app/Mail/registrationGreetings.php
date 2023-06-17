@@ -28,6 +28,7 @@ class registrationGreetings extends Mailable
      */
     public function build()
     {
-        return $this->view('Mail.greetings');
+        return $this->from(env('MAIL_USERNAME'), env('MAIL_FROM_NAME'))
+            ->view('Mail.greetings');
     }
 }

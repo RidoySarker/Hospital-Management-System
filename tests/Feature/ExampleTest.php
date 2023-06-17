@@ -12,10 +12,22 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
+    // public function testBasicTest()
+    // {
+    //     $response = $this->get('/');
+
+    //     $response->assertStatus(200);
+    // }
     public function testBasicTest()
     {
         $response = $this->get('/');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302); // Assert initial redirection
+
+        $redirectTarget = $response->getTargetUrl();
+        $response = $this->get($redirectTarget); // Follow the redirection
+
+        $response->assertStatus(200); // Assert the final status code
     }
+
 }

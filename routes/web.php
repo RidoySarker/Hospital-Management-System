@@ -1,6 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\RegisterController;
+
 Route::get('/', 'HomeController@index');
+Route::post('register', [RegisterController::class, 'register']);
 
 Auth::routes();
 
